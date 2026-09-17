@@ -1,0 +1,486 @@
+/**
+ * AETHER-Z³ MATHEMATICAL ENGINE
+ * MODULE: EQUATION SOLVER
+ *
+ * Solves algebraic equations: linear, quadratic, polynomial, systems.
+ * Returns solutions as MathNode for seamless LaTeX/simplify integration.
+ */
+import type { MathNode } from './ast.ts';
+import { N, Add, Sub, Mul, Div, Sqrt } from './ast.ts';
+import { simplify, evaluate } from './simplify.ts';
+
+// ─── SOLUTION TYPES ─────────────────────────────────────────────
+
+export interface SolveResult {
+  solutions: MathNode[];
+  variable: string;
+  method: string;
+  verified: boolean;
+}
+
+export interface SystemSolveResult {
+  solutions: Record<string, number>;
+  method: string;
+  verified: boolean;
+}
+
+// ─── COEFFICIENT EXTRACTION ─────────────────────────────────────
+
+interface PolyCoeffs {
+  degree: number;
+  coeffs: number[];
+}
+
+function collectTerms(node: MathNode): Map<string, number> {
+  const terms = new Map<string, number>();
+  function walk(n: MathNode, sign: number) {
+    if (n.kind === 'num') { const k = `_const`; terms.set(k, (terms.get(k) ?? 0) + sign * n.value); return; }
+    if (n.kind === 'var') { const k = n.name; terms.set(k, (terms.get(k) ?? 0) + sign); return; }
+    if (n.kind === 'unary' && n.op === '-') { walk(n.operand, -sign); return; }
+    if (n.kind === 'binop' && n.op === '+') { walk(n.left, sign); walk(n.right, sign); return; }
+    if (n.kind === 'binop' && n.op === '-') { walk(n.left, sign); walk(n.right, -sign); return; }
+    if (n.kind === 'binop' && n.op === '*') {
+      // Handle x*x as x^2
+      if (n.left.kind === 'var' && n.right.kind === 'var' && n.left.name === n.right.name) {
+        const varName = n.left.name;
+        const key = `${varName}^2`;
+        terms.set(key, (terms.get(key) ?? 0) + sign);
+        return;
+      }
+      const lc = extractConstFactor(n.left);
+      const rc = extractConstFactor(n.right);
+      const coeff = lc * rc;
+      const vLeft = stripConst(n.left);
+      const vRight = stripConst(n.right);
+      // 'key' unused; retained for future extensions
+      const monomial = multiplyMonomials(vLeft, vRight);
+      const mk = nodeToKey(monomial);
+      terms.set(mk, (terms.get(mk) ?? 0) + sign * coeff);
+      return;
+    }
+    if (n.kind === 'pow' && n.base.kind === 'var' && n.exp.kind === 'num') { const k = nodeToKey(n); terms.set(k, (terms.get(k) ?? 0) + sign); return; }
+    // redundant pow case removed
+    const fallback = evaluate(n, {}) ?? 0;
+    if (Number.isFinite(fallback)) { terms.set('_const', (terms.get('_const') ?? 0) + sign * fallback); return; }
+  }
+  walk(node, 1);
+  return terms;
+}
+
+function extractConstFactor(node: MathNode): number {
+  if (node.kind === 'num') return node.value;
+  if (node.kind === 'unary' && node.op === '-') return -extractConstFactor(node.operand);
+  if (node.kind === 'binop' && node.op === '*') return extractConstFactor(node.left) * extractConstFactor(node.right);
+  if (node.kind === 'binop' && node.op === '/') {
+    const d = extractConstFactor(node.right);
+    return d !== 0 ? extractConstFactor(node.left) / d : NaN;
+  }
+  return 1;
+}
+
+function stripConst(node: MathNode): MathNode {
+  if (node.kind === 'num') return N(1);
+  if (node.kind === 'unary' && node.op === '-') return stripConst(node.operand);
+  if (node.kind === 'binop' && node.op === '*') {
+    const lc = node.left.kind === 'num' ? N(1) : node.left;
+    const rc = node.right.kind === 'num' ? N(1) : node.right;
+    if (lc.kind === 'num' && lc.value === 1) return rc;
+    if (rc.kind === 'num' && rc.value === 1) return lc;
+    return Mul(stripConst(node.left), stripConst(node.right));
+  }
+  return node;
+}
+
+function nodeToKey(node: MathNode): string {
+  if (node.kind === 'var') return node.name;
+  if (node.kind === 'num') return `${node.value}`;
+  if (node.kind === 'pow' && node.base.kind === 'var' && node.exp.kind === 'num') return `${node.base.name}^${node.exp.value}`;
+  if (node.kind === 'unary' && node.op === '-') return `-${nodeToKey(node.operand)}`;
+  return JSON.stringify(node);
+}
+
+function multiplyMonomials(a: MathNode, b: MathNode): MathNode {
+  if (a.kind === 'num' && a.value === 1) return b;
+  if (b.kind === 'num' && b.value === 1) return a;
+  if (a.kind === 'num' && b.kind === 'num') return N(a.value * b.value);
+  return Mul(a, b);
+}
+
+function extractPolyCoeffs(eq: MathNode, v: string): PolyCoeffs | null {
+  let body: MathNode;
+  if (eq.kind === 'equation') {
+    body = Sub(eq.left, eq.right);
+  } else {
+    body = eq;
+  }
+  body = simplify(body);
+
+  const terms = collectTerms(body);
+  let maxDeg = 0;
+  const coeffs: Record<number, number> = {};
+
+  for (const [key, val] of terms) {
+    const match = key.match(new RegExp(`^${v}\\^(\\d+)$`));
+    if (match) {
+      const deg = parseInt(match[1]);
+      maxDeg = Math.max(maxDeg, deg);
+      coeffs[deg] = (coeffs[deg] ?? 0) + val;
+    } else if (key === v) {
+      maxDeg = Math.max(maxDeg, 1);
+      coeffs[1] = (coeffs[1] ?? 0) + val;
+    } else if (key === '_const') {
+      coeffs[0] = (coeffs[0] ?? 0) + val;
+    } else {
+    // No valNum usage
+      const vParts = key.split('*');
+      const degParts = vParts.filter(p => p.match(new RegExp(`^${v}(\\^(\\d+))?$`)));
+      if (degParts.length > 0) {
+        const m = degParts[0].match(new RegExp(`^${v}(\\^(\\d+))?$`));
+        if (m) {
+          const deg = m[2] ? parseInt(m[2]) : 1;
+          maxDeg = Math.max(maxDeg, deg);
+          coeffs[deg] = (coeffs[deg] ?? 0) + val;
+        }
+      }
+    }
+  }
+
+  if (maxDeg === 0 && (coeffs[0] ?? 0) === 0) {
+    return null;
+  }
+
+  const result: number[] = [];
+  for (let i = 0; i <= maxDeg; i++) {
+    result.push(coeffs[i] ?? 0);
+  }
+
+  return { degree: maxDeg, coeffs: result };
+}
+
+// ─── LINEAR: ax + b = 0 ────────────────────────────────────────
+
+function solveLinear(coeffs: number[], v: string): SolveResult {
+  const [b, a] = coeffs;
+  if (a === 0) {
+    return { solutions: [], variable: v, method: 'linear-degenerate', verified: false };
+  }
+  const solution = N(-b / a);
+  return { solutions: [solution], variable: v, method: 'linear', verified: true };
+}
+
+// ─── QUADRATIC: ax² + bx + c = 0 ──────────────────────────────
+
+function solveQuadratic(coeffs: number[], v: string): SolveResult {
+  // robust extraction: a is highest-degree coeff, c is constant term
+  console.log('DEBUG coeffs in solveQuadratic:', coeffs);
+  const len = coeffs.length;
+
+  const a = coeffs[len - 1];
+  const b = coeffs[len - 2];
+  const c = coeffs[0];
+  if (a === 0) return solveLinear([b, c], v);
+
+  const disc = b * b - 4 * a * c;
+
+  if (disc > 1e-12) {
+    const sqrtDisc = Math.sqrt(disc);
+    const s1 = N((-b - sqrtDisc) / (2 * a));
+    const s2 = N((-b + sqrtDisc) / (2 * a));
+    return { solutions: [s1, s2], variable: v, method: 'quadratic-formula', verified: true };
+  }
+
+  if (Math.abs(disc) <= 1e-12) {
+    const s = N(-b / (2 * a));
+    return { solutions: [s], variable: v, method: 'quadratic-repeated', verified: true };
+  }
+
+  const realPart = N(-b / (2 * a));
+  const imagPart = simplify(Div(Sqrt(N(-disc)), N(2 * a)));
+  const s1 = Add(realPart, Mul(N(0), imagPart));
+  const s2 = Sub(realPart, Mul(N(0), imagPart));
+  return { solutions: [s1, s2], variable: v, method: 'quadratic-complex', verified: false };
+}
+
+
+// ─── CUBIC (Cardano) ────────────────────────────────────────────
+
+function solveCubic(coeffs: number[], v: string): SolveResult {
+  const [d, c, b, a] = coeffs;
+  if (a === 0) return solveQuadratic([c, b, d], v);
+
+  const p = (3 * a * c - b * b) / (3 * a * a);
+  const q = (2 * b * b * b - 9 * a * b * c + 27 * a * a * d) / (27 * a * a * a);
+  const disc = -(4 * p * p * p + 27 * q * q);
+  const shift = -b / (3 * a);
+  const solutions: MathNode[] = [];
+
+  if (disc > 1e-12) {
+    const mp = Math.sqrt(-p / 3);
+    const theta = Math.acos(Math.max(-1, Math.min(1, -q / (2 * mp * mp * mp)))) / 3;
+    for (let k = 0; k < 3; k++) {
+      const val = 2 * mp * Math.cos(theta + (2 * Math.PI * k) / 3) + shift;
+      solutions.push(simplify(N(Math.round(val * 1e12) / 1e12)));
+    }
+  } else if (Math.abs(disc) <= 1e-12) {
+    const u = Math.cbrt(-q / 2);
+    solutions.push(simplify(N(Math.round((2 * u + shift) * 1e12) / 1e12)));
+    solutions.push(simplify(N(Math.round((-u + shift) * 1e12) / 1e12)));
+  } else {
+    const sd = Math.sqrt(q * q / 4 + p * p * p / 27);
+    const u = Math.cbrt(-q / 2 + sd);
+    const w = Math.cbrt(-q / 2 - sd);
+    solutions.push(simplify(N(Math.round((u + w + shift) * 1e12) / 1e12)));
+  }
+
+  return { solutions, variable: v, method: 'cubic-cardano', verified: solutions.length > 0 };
+}
+
+// ─── NUMERICAL: Newton-Raphson + Bisection ──────────────────────
+
+function evalAt(expr: MathNode, v: string, val: number): number {
+  return evaluate(expr, { [v]: val });
+}
+
+function derivativeNumerical(expr: MathNode, v: string, x: number, h = 1e-8): number {
+  return (evalAt(expr, v, x + h) - evalAt(expr, v, x - h)) / (2 * h);
+}
+
+function newtonRaphson(expr: MathNode, v: string, x0: number, maxIter = 50, tol = 1e-10): number | null {
+  let x = x0;
+  for (let i = 0; i < maxIter; i++) {
+    const fx = evalAt(expr, v, x);
+    if (Math.abs(fx) < tol) return x;
+    const dfx = derivativeNumerical(expr, v, x);
+    if (Math.abs(dfx) < 1e-15) break;
+    x = x - fx / dfx;
+  }
+  return Math.abs(evalAt(expr, v, x)) < tol * 100 ? x : null;
+}
+
+function bisection(expr: MathNode, v: string, a: number, b: number, maxIter = 100, tol = 1e-10): number | null {
+  let fa = evalAt(expr, v, a);
+  let fb = evalAt(expr, v, b);
+  if (fa * fb > 0) return null;
+  if (Math.abs(fa) < tol) return a;
+  if (Math.abs(fb) < tol) return b;
+
+  for (let i = 0; i < maxIter; i++) {
+    const mid = (a + b) / 2;
+    const fm = evalAt(expr, v, mid);
+    if (Math.abs(fm) < tol || (b - a) / 2 < tol) return mid;
+    if (fa * fm < 0) { b = mid; fb = fm; }
+    else { a = mid; fa = fm; }
+  }
+  return Math.abs(evalAt(expr, v, (a + b) / 2)) < tol * 10 ? (a + b) / 2 : null;
+}
+
+function findNumericalRoots(expr: MathNode, v: string, searchRange = 20, step = 0.5): number[] {
+  const roots: number[] = [];
+  const seen = new Set<string>();
+
+  function addRoot(r: number) {
+    const rounded = Math.round(r * 1e8) / 1e8;
+    const key = rounded.toFixed(8);
+    if (!seen.has(key)) {
+      seen.add(key);
+      roots.push(rounded);
+    }
+  }
+
+  for (let x = -searchRange; x <= searchRange; x += step) {
+    const fa = evalAt(expr, v, x);
+    const fb = evalAt(expr, v, x + step);
+    if (Math.abs(fa) < 1e-10) addRoot(x);
+    if (fa * fb < 0) {
+      const root = bisection(expr, v, x, x + step);
+      if (root !== null) addRoot(root);
+    }
+  }
+
+  for (const r of [...roots]) {
+    const refined = newtonRaphson(expr, v, r);
+    if (refined !== null) addRoot(refined);
+  }
+
+  return roots.sort((a, b) => a - b);
+}
+
+// ─── POLYNOMIAL ROOTS (Durand-Kerner) ──────────────────────────
+
+export function durandKerner(coeffs: number[], maxIter = 100, tol = 1e-10): { re: number; im: number }[] {
+  const n = coeffs.length - 1;
+  if (n <= 0) return [];
+  const a = coeffs.map(c => c / coeffs[0]);
+  const roots: { re: number; im: number }[] = [];
+
+  for (let i = 0; i < n; i++) {
+    const angle = (2 * Math.PI * i) / n;
+    roots.push({ re: 0.9 * Math.cos(angle), im: 0.9 * Math.sin(angle) });
+  }
+
+  for (let iter = 0; iter < maxIter; iter++) {
+    let maxDelta = 0;
+    for (let i = 0; i < n; i++) {
+      let numRe = 1, numIm = 0;
+      let denRe = 0, denIm = 0;
+
+      for (let j = 0; j < n; j++) {
+        if (j === i) continue;
+        const dRe = roots[i].re - roots[j].re;
+        const dIm = roots[i].im - roots[j].im;
+        const newDenRe = denRe * dRe - denIm * dIm + dRe;
+        const newDenIm = denRe * dIm + denIm * dRe + dIm;
+        const tempRe = numRe * dRe - numIm * dIm;
+        const tempIm = numRe * dIm + numIm * dRe;
+        numRe = tempRe;
+        numIm = tempIm;
+        denRe = newDenRe;
+        denIm = newDenIm;
+      }
+
+      let polyRe = a[n], polyIm = 0;
+      for (let k = n - 1; k >= 0; k--) {
+        const newRe = polyRe * roots[i].re - polyIm * roots[i].im + a[k];
+        const newIm = polyRe * roots[i].im + polyIm * roots[i].re;
+        polyRe = newRe;
+        polyIm = newIm;
+      }
+
+      const den2 = denRe * denRe + denIm * denIm;
+      if (den2 < 1e-30) continue;
+
+      const deltaRe = (polyRe * denRe + polyIm * denIm) / den2;
+      const deltaIm = (polyIm * denRe - polyRe * denIm) / den2;
+      roots[i].re -= deltaRe;
+      roots[i].im -= deltaIm;
+      maxDelta = Math.max(maxDelta, Math.sqrt(deltaRe * deltaRe + deltaIm * deltaIm));
+    }
+    if (maxDelta < tol) break;
+  }
+
+  return roots;
+}
+
+// ─── SYSTEM OF EQUATIONS (Gaussian Elimination) ─────────────────
+
+export function solveSystem(equations: MathNode[], variables: string[]): SystemSolveResult | null {
+  const n = equations.length;
+  if (n === 0 || variables.length !== n) return null;
+
+  const matrix: number[][] = [];
+  for (const eq of equations) {
+    if (eq.kind !== 'equation') return null;
+    const row: number[] = [];
+    const body = simplify(Sub(eq.left, eq.right));
+    for (const v of variables) {
+      const coeff = extractLinearCoeff(body, v);
+      row.push(coeff);
+    }
+    const constTerm = evaluateConstant(body, variables);
+    row.push(-constTerm);
+    matrix.push(row);
+  }
+
+  for (let col = 0; col < n; col++) {
+    let maxRow = col;
+    for (let row = col + 1; row < n; row++) {
+      if (Math.abs(matrix[row][col]) > Math.abs(matrix[maxRow][col])) maxRow = row;
+    }
+    [matrix[col], matrix[maxRow]] = [matrix[maxRow], matrix[col]];
+
+    if (Math.abs(matrix[col][col]) < 1e-12) return null;
+
+    for (let row = col + 1; row < n; row++) {
+      const factor = matrix[row][col] / matrix[col][col];
+      for (let j = col; j <= n; j++) {
+        matrix[row][j] -= factor * matrix[col][j];
+      }
+    }
+  }
+
+  const solution: Record<string, number> = {};
+  for (let i = n - 1; i >= 0; i--) {
+    let sum = matrix[i][n];
+    for (let j = i + 1; j < n; j++) {
+      sum -= matrix[i][j] * solution[variables[j]];
+    }
+    solution[variables[i]] = sum / matrix[i][i];
+  }
+
+  let verified = true;
+  for (let i = 0; i < n; i++) {
+    const env = variables.reduce<Record<string, number>>((acc, v) => ({ ...acc, [v]: solution[v] }), {});
+    const left = ((equations[i] as any).left) ?? N(0);
+    const right = ((equations[i] as any).right) ?? N(0);
+    const lhs = evaluate(left, env);
+    const rhs = evaluate(right, env);
+    if (Math.abs(lhs - rhs) > 1e-6) { verified = false; break; }
+  }
+
+  return { solutions: solution, method: 'gaussian-elimination', verified };
+}
+
+function extractLinearCoeff(expr: MathNode, v: string): number {
+  if (expr.kind === 'num') return 0;
+  if (expr.kind === 'var' && expr.name === v) return 1;
+  if (expr.kind === 'binop' && expr.op === '+') return extractLinearCoeff(expr.left, v) + extractLinearCoeff(expr.right, v);
+  if (expr.kind === 'binop' && expr.op === '-') return extractLinearCoeff(expr.left, v) - extractLinearCoeff(expr.right, v);
+  if (expr.kind === 'binop' && expr.op === '*') {
+    const lc = expr.left.kind === 'num' ? expr.left.value : (expr.right.kind === 'num' ? 1 : 0);
+    if (expr.left.kind === 'num') return lc * extractLinearCoeff(expr.right, v);
+    if (expr.right.kind === 'num') return lc * extractLinearCoeff(expr.left, v);
+    return 0;
+  }
+  if (expr.kind === 'unary' && expr.op === '-') return -extractLinearCoeff(expr.operand, v);
+  return 0;
+}
+
+function evaluateConstant(expr: MathNode, vars: string[]): number {
+  const env: Record<string, number> = {};
+  for (const v of vars) env[v] = 0;
+  return evaluate(expr, env);
+}
+
+// ─── MAIN SOLVE ─────────────────────────────────────────────────
+
+export function solve(eq: MathNode, v: string): SolveResult {
+  const simplified = simplify(eq);
+  const coeffs = extractPolyCoeffs(simplified, v);
+
+  if (coeffs && coeffs.degree >= 1 && coeffs.coeffs.every(Number.isFinite)) {
+    switch (coeffs.degree) {
+      case 1: return solveLinear(coeffs.coeffs, v);
+      case 2: return solveQuadratic(coeffs.coeffs, v);
+      case 3: return solveCubic(coeffs.coeffs, v);
+    }
+  }
+
+  let body: MathNode;
+  if (simplified.kind === 'equation') {
+    body = simplify(Sub(simplified.left, simplified.right));
+  } else {
+    body = simplified;
+  }
+
+  const numericalRoots = findNumericalRoots(body, v);
+  const solutions = numericalRoots.map(r => {
+    if (Math.abs(r - Math.round(r)) < 1e-8) return N(Math.round(r));
+    return N(Math.round(r * 1e8) / 1e8);
+  });
+
+  const verified = solutions.every(s => {
+    if (s.kind !== 'num') return false;
+    return Math.abs(evalAt(body, v, s.value)) < 1e-6;
+  });
+
+  return {
+    solutions,
+    variable: v,
+    method: coeffs && coeffs.degree > 3 ? `poly-deg-${coeffs.degree}-numerical` : 'numerical-newton-bisection',
+    verified
+  };
+}
+
+export function solveSystemOf(equations: MathNode[], variables: string[]): SystemSolveResult | null {
+  return solveSystem(equations, variables);
+}

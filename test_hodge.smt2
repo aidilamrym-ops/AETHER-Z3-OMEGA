@@ -1,0 +1,12 @@
+(set-logic QF_NRA)
+(set-info :source "hodge-finite-dim")
+(declare-fun h (Int Int) Int)
+(assert (forall ((p Int)(q Int))
+  (=> (and (>= p 0)(<= p 3)(>= q 0)(<= q 3))
+      (and (>= (h p q) 0) (<= (h p q) 1000000)))))
+(assert (forall ((p Int)(q Int))
+  (=> (and (>= p 0)(<= p 3)(>= q 0)(<= q 3))
+      (= (h p q) (h q p)))))
+; Contrary: h(1,1) exceeds bound
+(assert (> (h 1 1) 1000000))
+(check-sat)

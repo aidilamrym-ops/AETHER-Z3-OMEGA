@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+dist/
+*.js.map
+*.d.ts.map
+*.js
+!src/**/*.js
+
+# Lean
+lean4/.lake/
+lean4/build/
+lean4/AetherZ3Omega.olean
+lean4/AetherZ3Omega.ir
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+*.lnk
+
+# Temp files
+*.tmp
+*.bak
+*.orig
+tsout.txt

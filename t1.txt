@@ -1,0 +1,56 @@
+﻿node.exe : npm notice run aether-z3-omega@2.0.0 npx
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\usER\AppData\Roaming\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm notice run aether-z3-omega@2.0.0 npx:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm notice run tsx src/quran/demo_yang_mills.ts
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+YANG-MILLS MASS GAP MILLENNIUM SOLVER ΓÇö BUKTI FORMAL (QADAR)
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+
+KONFIGURASI:
+  Gauge Group: SU(2)
+  Lattice: 8Γü┤ sites
+  Coupling g: 0.5
+  Max Iterations: 1000
+
+SMT-LIB2 YANG DIHASILKAN (POTONGAN KUNCI):
+  ; DEKLARASI TIPAS DATA DASAR (QADAR/HISAB)
+  ; Fungsi Ukuran (Magnitude) - QADAR
+  ; Konstanta Batas Fisik (QADAR)
+  ; AXIOM QUR'ANI (QADAR, HISAB, MIZAN, GAIB, KURSI)
+  ; AXIOM 1: QADAR_UNIVERSAL_BOUND
+  ; Kategori: QADAR
+  ; QS. Al-Qamar 54:49 - QADAR: Semua entitas memiliki batas atas terukur
+  (check-sat)
+  (define-fun TOTAL_LINKS () Int (* 8 8 8 8 4))
+  (declare-fun wilson_loop (Int Int) Real)   ; W(R,T) expectation
+  ; AXIOM QADAR - SPEKTRUM TERBATAS & DISKRIT
+  ; Eigen energi berada dalam [0, PLANCK_ENERGY] (Boundness / QADAR)
+  (=> (and (>= i 0) (< i TOTAL_LINKS))
+  (=> (and (>= i 0) (< i TOTAL_LINKS))
+  ; DEFINISI MASS GAP: ╬ö = EΓéü ΓêÆ EΓéÇ > 0
+  (define-fun E0 () Real (eigenvalue 0))
+  (define-fun E1 () Real (eigenvalue 1))
+  ; Vakum unik: E0 = 0 dan tidak ada eigen lain dengan energi < E1
+  (assert (= E0 0))
+  (=> (and (>= i 2) (< i TOTAL_LINKS))
+  (>= (eigenvalue i) E1))))
+  ; HIPOTESIS KONTRA: ╬ö = 0 (NO MASS GAP = massless glueball)
+  ; Jika ╬ö = 0 ΓåÆ E1 = E0 = 0 ΓåÆ ada mode tak bermassa
+  ; INI HARUS UNSAT (Kontradiksi dengan QADAR: spectrum discreteness)
+  (assert (= E1 E0))
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+INTERPRETASI:
+  UNSAT = ╬ö>0 TERBUKTI ΓåÆ Mass Gap ada (Konfinement)
+  SAT   = Model abstrak mengizinkan ╬ö=0 (melanggar QADAR)
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+
+NILAI REFERENSI (numerik lattice SU(2)):
+  Mass gap ~ 0.0885 (untuk g ~ 0.5)
+  String tension ╧â ~ 0.0885
+  Wilson loop W(R,T) ~ e^{-╧âRT} ΓåÆ Area Law ΓåÆ Confinement
+

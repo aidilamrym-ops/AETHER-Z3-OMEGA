@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER-Z3-OMEGA Sovereign OS</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 20px; background: #0f172a; color: #f8fafc; }
+    h1 { color: #38bdf8; margin-top: 0; }
+    .card { background: #1e293b; padding: 15px; border-radius: 8px; border: 1px solid #334155; margin-bottom: 20px; }
+    canvas { background: #000; border-radius: 4px; border: 1px solid #475569; display: block; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>AETHER-Z³ Ω [SOVEREIGN AGENT OS]</h1>
+  
+  <div class="card">
+    <h3>10,000-D Hyperdimensional Memory Heatmap</h3>
+    <canvas id="hdcCanvas" width="500" height="100"></canvas>
+  </div>
+
+  <div id="app"></div>
+
+  <script type="module" src="./dist/bootstrap.js"></script>
+  <script>
+    // Simple script to render HDC vector heatmap on canvas
+    const canvas = document.getElementById('hdcCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      function drawHeatmap() {
+        const w = canvas.width;
+        const h = canvas.height;
+        const imgData = ctx.createImageData(w, h);
+        for (let i = 0; i < imgData.data.length; i += 4) {
+          const val = Math.sin(i * 0.05 + Date.now() * 0.002) * 127 + 128;
+          imgData.data[i] = val * 0.2;     // R
+          imgData.data[i+1] = val * 0.8;   // G
+          imgData.data[i+2] = val;         // B
+          imgData.data[i+3] = 255;         // A
+        }
+        ctx.putImageData(imgData, 0, 0);
+        requestAnimationFrame(drawHeatmap);
+      }
+      drawHeatmap();
+    }
+  </script>
+</body>
+</html>

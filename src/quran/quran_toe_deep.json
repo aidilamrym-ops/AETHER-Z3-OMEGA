@@ -1,0 +1,3057 @@
+{
+  "total_ayahs": 6236,
+  "total_letters": 328288,
+  "surah_data": [
+    {
+      "num": 1,
+      "name_en": "Al-Faatiha",
+      "name_ar": "سُورَةُ ٱلْفَاتِحَةِ",
+      "ayahs": 7,
+      "revelation": "Meccan",
+      "letters": 139,
+      "top_letter": [
+        "ل",
+        22
+      ],
+      "top3": [
+        [
+          "ل",
+          22
+        ],
+        [
+          "م",
+          15
+        ],
+        [
+          "ٱ",
+          14
+        ]
+      ]
+    },
+    {
+      "num": 2,
+      "name_en": "Al-Baqara",
+      "name_ar": "سُورَةُ البَقَرَةِ",
+      "ayahs": 286,
+      "revelation": "Medinan",
+      "letters": 25918,
+      "top_letter": [
+        "ل",
+        3202
+      ],
+      "top3": [
+        [
+          "ل",
+          3202
+        ],
+        [
+          "م",
+          2195
+        ],
+        [
+          "و",
+          2082
+        ]
+      ]
+    },
+    {
+      "num": 3,
+      "name_en": "Aal-i-Imraan",
+      "name_ar": "سُورَةُ آلِ عِمۡرَانَ",
+      "ayahs": 200,
+      "revelation": "Medinan",
+      "letters": 14781,
+      "top_letter": [
+        "ل",
+        1892
+      ],
+      "top3": [
+        [
+          "ل",
+          1892
+        ],
+        [
+          "م",
+          1249
+        ],
+        [
+          "ن",
+          1233
+        ]
+      ]
+    },
+    {
+      "num": 4,
+      "name_en": "An-Nisaa",
+      "name_ar": "سُورَةُ النِّسَاءِ",
+      "ayahs": 176,
+      "revelation": "Medinan",
+      "letters": 16104,
+      "top_letter": [
+        "ل",
+        1959
+      ],
+      "top3": [
+        [
+          "ل",
+          1959
+        ],
+        [
+          "ن",
+          1335
+        ],
+        [
+          "ا",
+          1325
+        ]
+      ]
+    },
+    {
+      "num": 5,
+      "name_en": "Al-Maaida",
+      "name_ar": "سُورَةُ المَائـِدَةِ",
+      "ayahs": 120,
+      "revelation": "Medinan",
+      "letters": 12051,
+      "top_letter": [
+        "ل",
+        1464
+      ],
+      "top3": [
+        [
+          "ل",
+          1464
+        ],
+        [
+          "م",
+          1042
+        ],
+        [
+          "ن",
+          975
+        ]
+      ]
+    },
+    {
+      "num": 6,
+      "name_en": "Al-An'aam",
+      "name_ar": "سُورَةُ الأَنۡعَامِ",
+      "ayahs": 165,
+      "revelation": "Meccan",
+      "letters": 12590,
+      "top_letter": [
+        "ل",
+        1448
+      ],
+      "top3": [
+        [
+          "ل",
+          1448
+        ],
+        [
+          "م",
+          1061
+        ],
+        [
+          "ن",
+          1011
+        ]
+      ]
+    },
+    {
+      "num": 7,
+      "name_en": "Al-A'raaf",
+      "name_ar": "سُورَةُ الأَعۡرَافِ",
+      "ayahs": 206,
+      "revelation": "Meccan",
+      "letters": 14264,
+      "top_letter": [
+        "ل",
+        1530
+      ],
+      "top3": [
+        [
+          "ل",
+          1530
+        ],
+        [
+          "ن",
+          1304
+        ],
+        [
+          "ا",
+          1213
+        ]
+      ]
+    },
+    {
+      "num": 8,
+      "name_en": "Al-Anfaal",
+      "name_ar": "سُورَةُ الأَنفَالِ",
+      "ayahs": 75,
+      "revelation": "Medinan",
+      "letters": 5368,
+      "top_letter": [
+        "ل",
+        657
+      ],
+      "top3": [
+        [
+          "ل",
+          657
+        ],
+        [
+          "و",
+          475
+        ],
+        [
+          "م",
+          458
+        ]
+      ]
+    },
+    {
+      "num": 9,
+      "name_en": "At-Tawba",
+      "name_ar": "سُورَةُ التَّوۡبَةِ",
+      "ayahs": 129,
+      "revelation": "Medinan",
+      "letters": 10954,
+      "top_letter": [
+        "ل",
+        1347
+      ],
+      "top3": [
+        [
+          "ل",
+          1347
+        ],
+        [
+          "و",
+          985
+        ],
+        [
+          "م",
+          964
+        ]
+      ]
+    },
+    {
+      "num": 10,
+      "name_en": "Yunus",
+      "name_ar": "سُورَةُ يُونُسَ",
+      "ayahs": 109,
+      "revelation": "Meccan",
+      "letters": 7540,
+      "top_letter": [
+        "ل",
+        913
+      ],
+      "top3": [
+        [
+          "ل",
+          913
+        ],
+        [
+          "ن",
+          690
+        ],
+        [
+          "م",
+          654
+        ]
+      ]
+    },
+    {
+      "num": 11,
+      "name_en": "Hud",
+      "name_ar": "سُورَةُ هُودٍ",
+      "ayahs": 123,
+      "revelation": "Meccan",
+      "letters": 7745,
+      "top_letter": [
+        "ل",
+        795
+      ],
+      "top3": [
+        [
+          "ل",
+          795
+        ],
+        [
+          "م",
+          702
+        ],
+        [
+          "ا",
+          646
+        ]
+      ]
+    },
+    {
+      "num": 12,
+      "name_en": "Yusuf",
+      "name_ar": "سُورَةُ يُوسُفَ",
+      "ayahs": 111,
+      "revelation": "Meccan",
+      "letters": 7224,
+      "top_letter": [
+        "ل",
+        812
+      ],
+      "top3": [
+        [
+          "ل",
+          812
+        ],
+        [
+          "ن",
+          633
+        ],
+        [
+          "ا",
+          595
+        ]
+      ]
+    },
+    {
+      "num": 13,
+      "name_en": "Ar-Ra'd",
+      "name_ar": "سُورَةُ الرَّعۡدِ",
+      "ayahs": 43,
+      "revelation": "Medinan",
+      "letters": 3519,
+      "top_letter": [
+        "ل",
+        480
+      ],
+      "top3": [
+        [
+          "ل",
+          480
+        ],
+        [
+          "و",
+          276
+        ],
+        [
+          "م",
+          260
+        ]
+      ]
+    },
+    {
+      "num": 14,
+      "name_en": "Ibrahim",
+      "name_ar": "سُورَةُ إِبۡرَاهِيمَ",
+      "ayahs": 52,
+      "revelation": "Meccan",
+      "letters": 3516,
+      "top_letter": [
+        "ل",
+        452
+      ],
+      "top3": [
+        [
+          "ل",
+          452
+        ],
+        [
+          "م",
+          306
+        ],
+        [
+          "ن",
+          278
+        ]
+      ]
+    },
+    {
+      "num": 15,
+      "name_en": "Al-Hijr",
+      "name_ar": "سُورَةُ الحِجۡرِ",
+      "ayahs": 99,
+      "revelation": "Meccan",
+      "letters": 2848,
+      "top_letter": [
+        "ل",
+        323
+      ],
+      "top3": [
+        [
+          "ل",
+          323
+        ],
+        [
+          "ن",
+          320
+        ],
+        [
+          "م",
+          257
+        ]
+      ]
+    },
+    {
+      "num": 16,
+      "name_en": "An-Nahl",
+      "name_ar": "سُورَةُ النَّحۡلِ",
+      "ayahs": 128,
+      "revelation": "Meccan",
+      "letters": 7742,
+      "top_letter": [
+        "ل",
+        989
+      ],
+      "top3": [
+        [
+          "ل",
+          989
+        ],
+        [
+          "م",
+          688
+        ],
+        [
+          "ن",
+          644
+        ]
+      ]
+    },
+    {
+      "num": 17,
+      "name_en": "Al-Israa",
+      "name_ar": "سُورَةُ الإِسۡرَاءِ",
+      "ayahs": 111,
+      "revelation": "Meccan",
+      "letters": 6584,
+      "top_letter": [
+        "ل",
+        748
+      ],
+      "top3": [
+        [
+          "ل",
+          748
+        ],
+        [
+          "ا",
+          608
+        ],
+        [
+          "ن",
+          531
+        ]
+      ]
+    },
+    {
+      "num": 18,
+      "name_en": "Al-Kahf",
+      "name_ar": "سُورَةُ الكَهۡفِ",
+      "ayahs": 110,
+      "revelation": "Meccan",
+      "letters": 6507,
+      "top_letter": [
+        "ل",
+        663
+      ],
+      "top3": [
+        [
+          "ل",
+          663
+        ],
+        [
+          "ا",
+          649
+        ],
+        [
+          "ن",
+          509
+        ]
+      ]
+    },
+    {
+      "num": 19,
+      "name_en": "Maryam",
+      "name_ar": "سُورَةُ مَرۡيَمَ",
+      "ayahs": 98,
+      "revelation": "Meccan",
+      "letters": 3887,
+      "top_letter": [
+        "ل",
+        389
+      ],
+      "top3": [
+        [
+          "ل",
+          389
+        ],
+        [
+          "ا",
+          362
+        ],
+        [
+          "ن",
+          341
+        ]
+      ]
+    },
+    {
+      "num": 20,
+      "name_en": "Taa-Haa",
+      "name_ar": "سُورَةُ طه",
+      "ayahs": 135,
+      "revelation": "Meccan",
+      "letters": 5357,
+      "top_letter": [
+        "ل",
+        587
+      ],
+      "top3": [
+        [
+          "ل",
+          587
+        ],
+        [
+          "ا",
+          449
+        ],
+        [
+          "ن",
+          399
+        ]
+      ]
+    },
+    {
+      "num": 21,
+      "name_en": "Al-Anbiyaa",
+      "name_ar": "سُورَةُ الأَنبِيَاءِ",
+      "ayahs": 112,
+      "revelation": "Meccan",
+      "letters": 4999,
+      "top_letter": [
+        "ل",
+        542
+      ],
+      "top3": [
+        [
+          "ل",
+          542
+        ],
+        [
+          "ن",
+          511
+        ],
+        [
+          "ا",
+          413
+        ]
+      ]
+    },
+    {
+      "num": 22,
+      "name_en": "Al-Hajj",
+      "name_ar": "سُورَةُ الحَجِّ",
+      "ayahs": 78,
+      "revelation": "Medinan",
+      "letters": 5256,
+      "top_letter": [
+        "ل",
+        691
+      ],
+      "top3": [
+        [
+          "ل",
+          691
+        ],
+        [
+          "م",
+          424
+        ],
+        [
+          "ن",
+          389
+        ]
+      ]
+    },
+    {
+      "num": 23,
+      "name_en": "Al-Muminoon",
+      "name_ar": "سُورَةُ المُؤۡمِنُونَ",
+      "ayahs": 118,
+      "revelation": "Meccan",
+      "letters": 4418,
+      "top_letter": [
+        "ل",
+        471
+      ],
+      "top3": [
+        [
+          "ل",
+          471
+        ],
+        [
+          "ن",
+          428
+        ],
+        [
+          "م",
+          386
+        ]
+      ]
+    },
+    {
+      "num": 24,
+      "name_en": "An-Noor",
+      "name_ar": "سُورَةُ النُّورِ",
+      "ayahs": 64,
+      "revelation": "Medinan",
+      "letters": 5683,
+      "top_letter": [
+        "ل",
+        721
+      ],
+      "top3": [
+        [
+          "ل",
+          721
+        ],
+        [
+          "م",
+          483
+        ],
+        [
+          "و",
+          456
+        ]
+      ]
+    },
+    {
+      "num": 25,
+      "name_en": "Al-Furqaan",
+      "name_ar": "سُورَةُ الفُرۡقَانِ",
+      "ayahs": 77,
+      "revelation": "Meccan",
+      "letters": 3844,
+      "top_letter": [
+        "ل",
+        448
+      ],
+      "top3": [
+        [
+          "ل",
+          448
+        ],
+        [
+          "ا",
+          412
+        ],
+        [
+          "و",
+          335
+        ]
+      ]
+    },
+    {
+      "num": 26,
+      "name_en": "Ash-Shu'araa",
+      "name_ar": "سُورَةُ الشُّعَرَاءِ",
+      "ayahs": 227,
+      "revelation": "Meccan",
+      "letters": 5592,
+      "top_letter": [
+        "ل",
+        613
+      ],
+      "top3": [
+        [
+          "ل",
+          613
+        ],
+        [
+          "ن",
+          603
+        ],
+        [
+          "م",
+          484
+        ]
+      ]
+    },
+    {
+      "num": 27,
+      "name_en": "An-Naml",
+      "name_ar": "سُورَةُ النَّمۡلِ",
+      "ayahs": 93,
+      "revelation": "Meccan",
+      "letters": 4766,
+      "top_letter": [
+        "ل",
+        532
+      ],
+      "top3": [
+        [
+          "ل",
+          532
+        ],
+        [
+          "ن",
+          423
+        ],
+        [
+          "م",
+          399
+        ]
+      ]
+    },
+    {
+      "num": 28,
+      "name_en": "Al-Qasas",
+      "name_ar": "سُورَةُ القَصَصِ",
+      "ayahs": 88,
+      "revelation": "Meccan",
+      "letters": 5880,
+      "top_letter": [
+        "ل",
+        666
+      ],
+      "top3": [
+        [
+          "ل",
+          666
+        ],
+        [
+          "ن",
+          565
+        ],
+        [
+          "ا",
+          461
+        ]
+      ]
+    },
+    {
+      "num": 29,
+      "name_en": "Al-Ankaboot",
+      "name_ar": "سُورَةُ العَنكَبُوتِ",
+      "ayahs": 69,
+      "revelation": "Meccan",
+      "letters": 4275,
+      "top_letter": [
+        "ل",
+        554
+      ],
+      "top3": [
+        [
+          "ل",
+          554
+        ],
+        [
+          "ن",
+          408
+        ],
+        [
+          "و",
+          353
+        ]
+      ]
+    },
+    {
+      "num": 30,
+      "name_en": "Ar-Room",
+      "name_ar": "سُورَةُ الرُّومِ",
+      "ayahs": 60,
+      "revelation": "Meccan",
+      "letters": 3453,
+      "top_letter": [
+        "ل",
+        394
+      ],
+      "top3": [
+        [
+          "ل",
+          394
+        ],
+        [
+          "م",
+          317
+        ],
+        [
+          "ن",
+          276
+        ]
+      ]
+    },
+    {
+      "num": 31,
+      "name_en": "Luqman",
+      "name_ar": "سُورَةُ لُقۡمَانَ",
+      "ayahs": 34,
+      "revelation": "Meccan",
+      "letters": 2153,
+      "top_letter": [
+        "ل",
+        297
+      ],
+      "top3": [
+        [
+          "ل",
+          297
+        ],
+        [
+          "م",
+          173
+        ],
+        [
+          "ن",
+          154
+        ]
+      ]
+    },
+    {
+      "num": 32,
+      "name_en": "As-Sajda",
+      "name_ar": "سُورَةُ السَّجۡدَةِ",
+      "ayahs": 30,
+      "revelation": "Meccan",
+      "letters": 1561,
+      "top_letter": [
+        "ن",
+        159
+      ],
+      "top3": [
+        [
+          "ن",
+          159
+        ],
+        [
+          "م",
+          158
+        ],
+        [
+          "ل",
+          155
+        ]
+      ]
+    },
+    {
+      "num": 33,
+      "name_en": "Al-Ahzaab",
+      "name_ar": "سُورَةُ الأَحۡزَابِ",
+      "ayahs": 73,
+      "revelation": "Medinan",
+      "letters": 5694,
+      "top_letter": [
+        "ل",
+        712
+      ],
+      "top3": [
+        [
+          "ل",
+          712
+        ],
+        [
+          "ن",
+          507
+        ],
+        [
+          "ا",
+          482
+        ]
+      ]
+    },
+    {
+      "num": 34,
+      "name_en": "Saba",
+      "name_ar": "سُورَةُ سَبَإٍ",
+      "ayahs": 54,
+      "revelation": "Meccan",
+      "letters": 3568,
+      "top_letter": [
+        "ل",
+        419
+      ],
+      "top3": [
+        [
+          "ل",
+          419
+        ],
+        [
+          "ا",
+          309
+        ],
+        [
+          "م",
+          290
+        ]
+      ]
+    },
+    {
+      "num": 35,
+      "name_en": "Faatir",
+      "name_ar": "سُورَةُ فَاطِرٍ",
+      "ayahs": 45,
+      "revelation": "Meccan",
+      "letters": 3203,
+      "top_letter": [
+        "ل",
+        399
+      ],
+      "top3": [
+        [
+          "ل",
+          399
+        ],
+        [
+          "م",
+          253
+        ],
+        [
+          "ا",
+          237
+        ]
+      ]
+    },
+    {
+      "num": 36,
+      "name_en": "Yaseen",
+      "name_ar": "سُورَةُ يسٓ",
+      "ayahs": 83,
+      "revelation": "Meccan",
+      "letters": 3039,
+      "top_letter": [
+        "ل",
+        330
+      ],
+      "top3": [
+        [
+          "ل",
+          330
+        ],
+        [
+          "م",
+          312
+        ],
+        [
+          "ن",
+          302
+        ]
+      ]
+    },
+    {
+      "num": 37,
+      "name_en": "As-Saaffaat",
+      "name_ar": "سُورَةُ الصَّافَّاتِ",
+      "ayahs": 182,
+      "revelation": "Meccan",
+      "letters": 3847,
+      "top_letter": [
+        "ل",
+        447
+      ],
+      "top3": [
+        [
+          "ل",
+          447
+        ],
+        [
+          "ن",
+          434
+        ],
+        [
+          "م",
+          319
+        ]
+      ]
+    },
+    {
+      "num": 38,
+      "name_en": "Saad",
+      "name_ar": "سُورَةُ صٓ",
+      "ayahs": 88,
+      "revelation": "Meccan",
+      "letters": 3037,
+      "top_letter": [
+        "ل",
+        333
+      ],
+      "top3": [
+        [
+          "ل",
+          333
+        ],
+        [
+          "ا",
+          276
+        ],
+        [
+          "ن",
+          258
+        ]
+      ]
+    },
+    {
+      "num": 39,
+      "name_en": "Az-Zumar",
+      "name_ar": "سُورَةُ الزُّمَرِ",
+      "ayahs": 75,
+      "revelation": "Meccan",
+      "letters": 4805,
+      "top_letter": [
+        "ل",
+        627
+      ],
+      "top3": [
+        [
+          "ل",
+          627
+        ],
+        [
+          "م",
+          381
+        ],
+        [
+          "ن",
+          370
+        ]
+      ]
+    },
+    {
+      "num": 40,
+      "name_en": "Ghafir",
+      "name_ar": "سُورَةُ غَافِرٍ",
+      "ayahs": 85,
+      "revelation": "Meccan",
+      "letters": 5060,
+      "top_letter": [
+        "ل",
+        627
+      ],
+      "top3": [
+        [
+          "ل",
+          627
+        ],
+        [
+          "ن",
+          404
+        ],
+        [
+          "م",
+          380
+        ]
+      ]
+    },
+    {
+      "num": 41,
+      "name_en": "Fussilat",
+      "name_ar": "سُورَةُ فُصِّلَتۡ",
+      "ayahs": 54,
+      "revelation": "Meccan",
+      "letters": 3355,
+      "top_letter": [
+        "ل",
+        358
+      ],
+      "top3": [
+        [
+          "ل",
+          358
+        ],
+        [
+          "ا",
+          304
+        ],
+        [
+          "ن",
+          296
+        ]
+      ]
+    },
+    {
+      "num": 42,
+      "name_en": "Ash-Shura",
+      "name_ar": "سُورَةُ الشُّورَىٰ",
+      "ayahs": 53,
+      "revelation": "Meccan",
+      "letters": 3490,
+      "top_letter": [
+        "ل",
+        428
+      ],
+      "top3": [
+        [
+          "ل",
+          428
+        ],
+        [
+          "م",
+          300
+        ],
+        [
+          "و",
+          271
+        ]
+      ]
+    },
+    {
+      "num": 43,
+      "name_en": "Az-Zukhruf",
+      "name_ar": "سُورَةُ الزُّخۡرُفِ",
+      "ayahs": 89,
+      "revelation": "Meccan",
+      "letters": 3572,
+      "top_letter": [
+        "ل",
+        374
+      ],
+      "top3": [
+        [
+          "ل",
+          374
+        ],
+        [
+          "ن",
+          330
+        ],
+        [
+          "م",
+          324
+        ]
+      ]
+    },
+    {
+      "num": 44,
+      "name_en": "Ad-Dukhaan",
+      "name_ar": "سُورَةُ الدُّخَانِ",
+      "ayahs": 59,
+      "revelation": "Meccan",
+      "letters": 1474,
+      "top_letter": [
+        "ن",
+        155
+      ],
+      "top3": [
+        [
+          "ن",
+          155
+        ],
+        [
+          "م",
+          150
+        ],
+        [
+          "ل",
+          140
+        ]
+      ]
+    },
+    {
+      "num": 45,
+      "name_en": "Al-Jaathiya",
+      "name_ar": "سُورَةُ الجَاثِيَةِ",
+      "ayahs": 37,
+      "revelation": "Meccan",
+      "letters": 2069,
+      "top_letter": [
+        "ل",
+        245
+      ],
+      "top3": [
+        [
+          "ل",
+          245
+        ],
+        [
+          "م",
+          200
+        ],
+        [
+          "ا",
+          165
+        ]
+      ]
+    },
+    {
+      "num": 46,
+      "name_en": "Al-Ahqaf",
+      "name_ar": "سُورَةُ الأَحۡقَافِ",
+      "ayahs": 35,
+      "revelation": "Meccan",
+      "letters": 2646,
+      "top_letter": [
+        "ل",
+        292
+      ],
+      "top3": [
+        [
+          "ل",
+          292
+        ],
+        [
+          "م",
+          225
+        ],
+        [
+          "ا",
+          223
+        ]
+      ]
+    },
+    {
+      "num": 47,
+      "name_en": "Muhammad",
+      "name_ar": "سُورَةُ مُحَمَّدٍ",
+      "ayahs": 38,
+      "revelation": "Medinan",
+      "letters": 2408,
+      "top_letter": [
+        "ل",
+        303
+      ],
+      "top3": [
+        [
+          "ل",
+          303
+        ],
+        [
+          "م",
+          226
+        ],
+        [
+          "و",
+          193
+        ]
+      ]
+    },
+    {
+      "num": 48,
+      "name_en": "Al-Fath",
+      "name_ar": "سُورَةُ الفَتۡحِ",
+      "ayahs": 29,
+      "revelation": "Medinan",
+      "letters": 2498,
+      "top_letter": [
+        "ل",
+        323
+      ],
+      "top3": [
+        [
+          "ل",
+          323
+        ],
+        [
+          "م",
+          205
+        ],
+        [
+          "ن",
+          188
+        ]
+      ]
+    },
+    {
+      "num": 49,
+      "name_en": "Al-Hujuraat",
+      "name_ar": "سُورَةُ الحُجُرَاتِ",
+      "ayahs": 18,
+      "revelation": "Medinan",
+      "letters": 1527,
+      "top_letter": [
+        "ل",
+        197
+      ],
+      "top3": [
+        [
+          "ل",
+          197
+        ],
+        [
+          "م",
+          135
+        ],
+        [
+          "و",
+          127
+        ]
+      ]
+    },
+    {
+      "num": 50,
+      "name_en": "Qaaf",
+      "name_ar": "سُورَةُ قٓ",
+      "ayahs": 45,
+      "revelation": "Meccan",
+      "letters": 1507,
+      "top_letter": [
+        "ل",
+        170
+      ],
+      "top3": [
+        [
+          "ل",
+          170
+        ],
+        [
+          "م",
+          118
+        ],
+        [
+          "ن",
+          113
+        ]
+      ]
+    },
+    {
+      "num": 51,
+      "name_en": "Adh-Dhaariyat",
+      "name_ar": "سُورَةُ الذَّارِيَاتِ",
+      "ayahs": 60,
+      "revelation": "Meccan",
+      "letters": 1542,
+      "top_letter": [
+        "ل",
+        162
+      ],
+      "top3": [
+        [
+          "ل",
+          162
+        ],
+        [
+          "م",
+          147
+        ],
+        [
+          "ن",
+          144
+        ]
+      ]
+    },
+    {
+      "num": 52,
+      "name_en": "At-Tur",
+      "name_ar": "سُورَةُ الطُّورِ",
+      "ayahs": 49,
+      "revelation": "Meccan",
+      "letters": 1324,
+      "top_letter": [
+        "م",
+        150
+      ],
+      "top3": [
+        [
+          "م",
+          150
+        ],
+        [
+          "ل",
+          118
+        ],
+        [
+          "ن",
+          118
+        ]
+      ]
+    },
+    {
+      "num": 53,
+      "name_en": "An-Najm",
+      "name_ar": "سُورَةُ النَّجۡمِ",
+      "ayahs": 62,
+      "revelation": "Meccan",
+      "letters": 1441,
+      "top_letter": [
+        "ل",
+        151
+      ],
+      "top3": [
+        [
+          "ل",
+          151
+        ],
+        [
+          "و",
+          116
+        ],
+        [
+          "ن",
+          114
+        ]
+      ]
+    },
+    {
+      "num": 54,
+      "name_en": "Al-Qamar",
+      "name_ar": "سُورَةُ القَمَرِ",
+      "ayahs": 55,
+      "revelation": "Meccan",
+      "letters": 1480,
+      "top_letter": [
+        "ل",
+        123
+      ],
+      "top3": [
+        [
+          "ل",
+          123
+        ],
+        [
+          "ن",
+          122
+        ],
+        [
+          "ا",
+          115
+        ]
+      ]
+    },
+    {
+      "num": 55,
+      "name_en": "Ar-Rahmaan",
+      "name_ar": "سُورَةُ الرَّحۡمَٰن",
+      "ayahs": 78,
+      "revelation": "Medinan",
+      "letters": 1676,
+      "top_letter": [
+        "ا",
+        218
+      ],
+      "top3": [
+        [
+          "ا",
+          218
+        ],
+        [
+          "ن",
+          143
+        ],
+        [
+          "ل",
+          142
+        ]
+      ]
+    },
+    {
+      "num": 56,
+      "name_en": "Al-Waaqia",
+      "name_ar": "سُورَةُ الوَاقِعَةِ",
+      "ayahs": 96,
+      "revelation": "Meccan",
+      "letters": 1738,
+      "top_letter": [
+        "ن",
+        202
+      ],
+      "top3": [
+        [
+          "ن",
+          202
+        ],
+        [
+          "م",
+          178
+        ],
+        [
+          "ل",
+          177
+        ]
+      ]
+    },
+    {
+      "num": 57,
+      "name_en": "Al-Hadid",
+      "name_ar": "سُورَةُ الحَدِيدِ",
+      "ayahs": 29,
+      "revelation": "Medinan",
+      "letters": 2524,
+      "top_letter": [
+        "ل",
+        317
+      ],
+      "top3": [
+        [
+          "ل",
+          317
+        ],
+        [
+          "م",
+          218
+        ],
+        [
+          "و",
+          218
+        ]
+      ]
+    },
+    {
+      "num": 58,
+      "name_en": "Al-Mujaadila",
+      "name_ar": "سُورَةُ المُجَادلَةِ",
+      "ayahs": 22,
+      "revelation": "Medinan",
+      "letters": 2030,
+      "top_letter": [
+        "ل",
+        259
+      ],
+      "top3": [
+        [
+          "ل",
+          259
+        ],
+        [
+          "و",
+          184
+        ],
+        [
+          "م",
+          172
+        ]
+      ]
+    },
+    {
+      "num": 59,
+      "name_en": "Al-Hashr",
+      "name_ar": "سُورَةُ الحَشۡرِ",
+      "ayahs": 24,
+      "revelation": "Medinan",
+      "letters": 1950,
+      "top_letter": [
+        "ل",
+        274
+      ],
+      "top3": [
+        [
+          "ل",
+          274
+        ],
+        [
+          "و",
+          159
+        ],
+        [
+          "ن",
+          156
+        ]
+      ]
+    },
+    {
+      "num": 60,
+      "name_en": "Al-Mumtahana",
+      "name_ar": "سُورَةُ المُمۡتَحنَةِ",
+      "ayahs": 13,
+      "revelation": "Medinan",
+      "letters": 1561,
+      "top_letter": [
+        "ل",
+        174
+      ],
+      "top3": [
+        [
+          "ل",
+          174
+        ],
+        [
+          "م",
+          143
+        ],
+        [
+          "ن",
+          135
+        ]
+      ]
+    },
+    {
+      "num": 61,
+      "name_en": "As-Saff",
+      "name_ar": "سُورَةُ الصَّفِّ",
+      "ayahs": 14,
+      "revelation": "Medinan",
+      "letters": 964,
+      "top_letter": [
+        "ل",
+        126
+      ],
+      "top3": [
+        [
+          "ل",
+          126
+        ],
+        [
+          "ن",
+          79
+        ],
+        [
+          "م",
+          78
+        ]
+      ]
+    },
+    {
+      "num": 62,
+      "name_en": "Al-Jumu'a",
+      "name_ar": "سُورَةُ الجُمُعَةِ",
+      "ayahs": 11,
+      "revelation": "Medinan",
+      "letters": 774,
+      "top_letter": [
+        "ل",
+        114
+      ],
+      "top3": [
+        [
+          "ل",
+          114
+        ],
+        [
+          "م",
+          74
+        ],
+        [
+          "و",
+          62
+        ]
+      ]
+    },
+    {
+      "num": 63,
+      "name_en": "Al-Munaafiqoon",
+      "name_ar": "سُورَةُ المُنَافِقُونَ",
+      "ayahs": 11,
+      "revelation": "Medinan",
+      "letters": 806,
+      "top_letter": [
+        "ل",
+        118
+      ],
+      "top3": [
+        [
+          "ل",
+          118
+        ],
+        [
+          "ن",
+          70
+        ],
+        [
+          "و",
+          69
+        ]
+      ]
+    },
+    {
+      "num": 64,
+      "name_en": "At-Taghaabun",
+      "name_ar": "سُورَةُ التَّغَابُنِ",
+      "ayahs": 18,
+      "revelation": "Medinan",
+      "letters": 1091,
+      "top_letter": [
+        "ل",
+        147
+      ],
+      "top3": [
+        [
+          "ل",
+          147
+        ],
+        [
+          "و",
+          105
+        ],
+        [
+          "م",
+          93
+        ]
+      ]
+    },
+    {
+      "num": 65,
+      "name_en": "At-Talaaq",
+      "name_ar": "سُورَةُ الطَّلَاقِ",
+      "ayahs": 12,
+      "revelation": "Medinan",
+      "letters": 1203,
+      "top_letter": [
+        "ل",
+        156
+      ],
+      "top3": [
+        [
+          "ل",
+          156
+        ],
+        [
+          "ن",
+          95
+        ],
+        [
+          "ه",
+          80
+        ]
+      ]
+    },
+    {
+      "num": 66,
+      "name_en": "At-Tahrim",
+      "name_ar": "سُورَةُ التَّحۡرِيمِ",
+      "ayahs": 12,
+      "revelation": "Medinan",
+      "letters": 1093,
+      "top_letter": [
+        "ل",
+        118
+      ],
+      "top3": [
+        [
+          "ل",
+          118
+        ],
+        [
+          "ن",
+          99
+        ],
+        [
+          "م",
+          87
+        ]
+      ]
+    },
+    {
+      "num": 67,
+      "name_en": "Al-Mulk",
+      "name_ar": "سُورَةُ المُلۡكِ",
+      "ayahs": 30,
+      "revelation": "Meccan",
+      "letters": 1349,
+      "top_letter": [
+        "ل",
+        146
+      ],
+      "top3": [
+        [
+          "ل",
+          146
+        ],
+        [
+          "م",
+          112
+        ],
+        [
+          "ن",
+          99
+        ]
+      ]
+    },
+    {
+      "num": 68,
+      "name_en": "Al-Qalam",
+      "name_ar": "سُورَةُ القَلَمِ",
+      "ayahs": 52,
+      "revelation": "Meccan",
+      "letters": 1283,
+      "top_letter": [
+        "ل",
+        133
+      ],
+      "top3": [
+        [
+          "ل",
+          133
+        ],
+        [
+          "ن",
+          132
+        ],
+        [
+          "م",
+          123
+        ]
+      ]
+    },
+    {
+      "num": 69,
+      "name_en": "Al-Haaqqa",
+      "name_ar": "سُورَةُ الحَاقَّةِ",
+      "ayahs": 52,
+      "revelation": "Meccan",
+      "letters": 1132,
+      "top_letter": [
+        "ل",
+        117
+      ],
+      "top3": [
+        [
+          "ل",
+          117
+        ],
+        [
+          "ا",
+          98
+        ],
+        [
+          "م",
+          92
+        ]
+      ]
+    },
+    {
+      "num": 70,
+      "name_en": "Al-Ma'aarij",
+      "name_ar": "سُورَةُ المَعَارِجِ",
+      "ayahs": 44,
+      "revelation": "Meccan",
+      "letters": 970,
+      "top_letter": [
+        "م",
+        101
+      ],
+      "top3": [
+        [
+          "م",
+          101
+        ],
+        [
+          "ل",
+          100
+        ],
+        [
+          "و",
+          83
+        ]
+      ]
+    },
+    {
+      "num": 71,
+      "name_en": "Nooh",
+      "name_ar": "سُورَةُ نُوحٍ",
+      "ayahs": 28,
+      "revelation": "Meccan",
+      "letters": 972,
+      "top_letter": [
+        "ا",
+        115
+      ],
+      "top3": [
+        [
+          "ا",
+          115
+        ],
+        [
+          "ل",
+          110
+        ],
+        [
+          "و",
+          83
+        ]
+      ]
+    },
+    {
+      "num": 72,
+      "name_en": "Al-Jinn",
+      "name_ar": "سُورَةُ الجِنِّ",
+      "ayahs": 28,
+      "revelation": "Meccan",
+      "letters": 1115,
+      "top_letter": [
+        "ل",
+        119
+      ],
+      "top3": [
+        [
+          "ل",
+          119
+        ],
+        [
+          "ا",
+          119
+        ],
+        [
+          "ن",
+          114
+        ]
+      ]
+    },
+    {
+      "num": 73,
+      "name_en": "Al-Muzzammil",
+      "name_ar": "سُورَةُ المُزَّمِّلِ",
+      "ayahs": 20,
+      "revelation": "Meccan",
+      "letters": 869,
+      "top_letter": [
+        "ل",
+        107
+      ],
+      "top3": [
+        [
+          "ل",
+          107
+        ],
+        [
+          "ا",
+          75
+        ],
+        [
+          "و",
+          71
+        ]
+      ]
+    },
+    {
+      "num": 74,
+      "name_en": "Al-Muddaththir",
+      "name_ar": "سُورَةُ المُدَّثِّرِ",
+      "ayahs": 56,
+      "revelation": "Meccan",
+      "letters": 1043,
+      "top_letter": [
+        "ل",
+        108
+      ],
+      "top3": [
+        [
+          "ل",
+          108
+        ],
+        [
+          "ا",
+          82
+        ],
+        [
+          "ن",
+          79
+        ]
+      ]
+    },
+    {
+      "num": 75,
+      "name_en": "Al-Qiyaama",
+      "name_ar": "سُورَةُ القِيَامَةِ",
+      "ayahs": 40,
+      "revelation": "Meccan",
+      "letters": 687,
+      "top_letter": [
+        "ل",
+        84
+      ],
+      "top3": [
+        [
+          "ل",
+          84
+        ],
+        [
+          "ن",
+          54
+        ],
+        [
+          "م",
+          43
+        ]
+      ]
+    },
+    {
+      "num": 76,
+      "name_en": "Al-Insaan",
+      "name_ar": "سُورَةُ الإِنسَانِ",
+      "ayahs": 31,
+      "revelation": "Medinan",
+      "letters": 1097,
+      "top_letter": [
+        "ا",
+        134
+      ],
+      "top3": [
+        [
+          "ا",
+          134
+        ],
+        [
+          "ل",
+          95
+        ],
+        [
+          "ن",
+          87
+        ]
+      ]
+    },
+    {
+      "num": 77,
+      "name_en": "Al-Mursalaat",
+      "name_ar": "سُورَةُ المُرۡسَلَاتِ",
+      "ayahs": 50,
+      "revelation": "Meccan",
+      "letters": 840,
+      "top_letter": [
+        "ل",
+        108
+      ],
+      "top3": [
+        [
+          "ل",
+          108
+        ],
+        [
+          "م",
+          77
+        ],
+        [
+          "و",
+          71
+        ]
+      ]
+    },
+    {
+      "num": 78,
+      "name_en": "An-Naba",
+      "name_ar": "سُورَةُ النَّبَإِ",
+      "ayahs": 40,
+      "revelation": "Meccan",
+      "letters": 797,
+      "top_letter": [
+        "ا",
+        124
+      ],
+      "top3": [
+        [
+          "ا",
+          124
+        ],
+        [
+          "ل",
+          74
+        ],
+        [
+          "ن",
+          62
+        ]
+      ]
+    },
+    {
+      "num": 79,
+      "name_en": "An-Naazi'aat",
+      "name_ar": "سُورَةُ النَّازِعَاتِ",
+      "ayahs": 46,
+      "revelation": "Meccan",
+      "letters": 791,
+      "top_letter": [
+        "ل",
+        70
+      ],
+      "top3": [
+        [
+          "ل",
+          70
+        ],
+        [
+          "ا",
+          66
+        ],
+        [
+          "م",
+          51
+        ]
+      ]
+    },
+    {
+      "num": 80,
+      "name_en": "Abasa",
+      "name_ar": "سُورَةُ عَبَسَ",
+      "ayahs": 42,
+      "revelation": "Meccan",
+      "letters": 565,
+      "top_letter": [
+        "م",
+        46
+      ],
+      "top3": [
+        [
+          "م",
+          46
+        ],
+        [
+          "ا",
+          42
+        ],
+        [
+          "ل",
+          39
+        ]
+      ]
+    },
+    {
+      "num": 81,
+      "name_en": "At-Takwir",
+      "name_ar": "سُورَةُ التَّكۡوِيرِ",
+      "ayahs": 29,
+      "revelation": "Meccan",
+      "letters": 450,
+      "top_letter": [
+        "ل",
+        49
+      ],
+      "top3": [
+        [
+          "ل",
+          49
+        ],
+        [
+          "و",
+          36
+        ],
+        [
+          "ا",
+          33
+        ]
+      ]
+    },
+    {
+      "num": 82,
+      "name_en": "Al-Infitaar",
+      "name_ar": "سُورَةُ الانفِطَارِ",
+      "ayahs": 19,
+      "revelation": "Meccan",
+      "letters": 348,
+      "top_letter": [
+        "ل",
+        35
+      ],
+      "top3": [
+        [
+          "ل",
+          35
+        ],
+        [
+          "م",
+          30
+        ],
+        [
+          "ا",
+          28
+        ]
+      ]
+    },
+    {
+      "num": 83,
+      "name_en": "Al-Mutaffifin",
+      "name_ar": "سُورَةُ المُطَفِّفِينَ",
+      "ayahs": 36,
+      "revelation": "Meccan",
+      "letters": 763,
+      "top_letter": [
+        "ل",
+        80
+      ],
+      "top3": [
+        [
+          "ل",
+          80
+        ],
+        [
+          "ن",
+          71
+        ],
+        [
+          "و",
+          68
+        ]
+      ]
+    },
+    {
+      "num": 84,
+      "name_en": "Al-Inshiqaaq",
+      "name_ar": "سُورَةُ الانشِقَاقِ",
+      "ayahs": 25,
+      "revelation": "Meccan",
+      "letters": 459,
+      "top_letter": [
+        "ل",
+        43
+      ],
+      "top3": [
+        [
+          "ل",
+          43
+        ],
+        [
+          "ا",
+          41
+        ],
+        [
+          "و",
+          36
+        ]
+      ]
+    },
+    {
+      "num": 85,
+      "name_en": "Al-Burooj",
+      "name_ar": "سُورَةُ البُرُوجِ",
+      "ayahs": 22,
+      "revelation": "Meccan",
+      "letters": 482,
+      "top_letter": [
+        "ل",
+        61
+      ],
+      "top3": [
+        [
+          "ل",
+          61
+        ],
+        [
+          "و",
+          49
+        ],
+        [
+          "م",
+          41
+        ]
+      ]
+    },
+    {
+      "num": 86,
+      "name_en": "At-Taariq",
+      "name_ar": "سُورَةُ الطَّارِقِ",
+      "ayahs": 17,
+      "revelation": "Meccan",
+      "letters": 271,
+      "top_letter": [
+        "ل",
+        37
+      ],
+      "top3": [
+        [
+          "ل",
+          37
+        ],
+        [
+          "ا",
+          24
+        ],
+        [
+          "م",
+          22
+        ]
+      ]
+    },
+    {
+      "num": 87,
+      "name_en": "Al-A'laa",
+      "name_ar": "سُورَةُ الأَعۡلَىٰ",
+      "ayahs": 19,
+      "revelation": "Meccan",
+      "letters": 315,
+      "top_letter": [
+        "ل",
+        38
+      ],
+      "top3": [
+        [
+          "ل",
+          38
+        ],
+        [
+          "ى",
+          24
+        ],
+        [
+          "ٱ",
+          22
+        ]
+      ]
+    },
+    {
+      "num": 88,
+      "name_en": "Al-Ghaashiya",
+      "name_ar": "سُورَةُ الغَاشِيَةِ",
+      "ayahs": 26,
+      "revelation": "Meccan",
+      "letters": 399,
+      "top_letter": [
+        "ل",
+        39
+      ],
+      "top3": [
+        [
+          "ل",
+          39
+        ],
+        [
+          "ي",
+          32
+        ],
+        [
+          "ا",
+          32
+        ]
+      ]
+    },
+    {
+      "num": 89,
+      "name_en": "Al-Fajr",
+      "name_ar": "سُورَةُ الفَجۡرِ",
+      "ayahs": 30,
+      "revelation": "Meccan",
+      "letters": 594,
+      "top_letter": [
+        "ل",
+        70
+      ],
+      "top3": [
+        [
+          "ل",
+          70
+        ],
+        [
+          "ا",
+          47
+        ],
+        [
+          "و",
+          39
+        ]
+      ]
+    },
+    {
+      "num": 90,
+      "name_en": "Al-Balad",
+      "name_ar": "سُورَةُ البَلَدِ",
+      "ayahs": 20,
+      "revelation": "Meccan",
+      "letters": 357,
+      "top_letter": [
+        "ل",
+        38
+      ],
+      "top3": [
+        [
+          "ل",
+          38
+        ],
+        [
+          "م",
+          30
+        ],
+        [
+          "ا",
+          29
+        ]
+      ]
+    },
+    {
+      "num": 91,
+      "name_en": "Ash-Shams",
+      "name_ar": "سُورَةُ الشَّمۡسِ",
+      "ayahs": 15,
+      "revelation": "Meccan",
+      "letters": 269,
+      "top_letter": [
+        "ا",
+        31
+      ],
+      "top3": [
+        [
+          "ا",
+          31
+        ],
+        [
+          "ه",
+          28
+        ],
+        [
+          "ل",
+          24
+        ]
+      ]
+    },
+    {
+      "num": 92,
+      "name_en": "Al-Lail",
+      "name_ar": "سُورَةُ اللَّيۡلِ",
+      "ayahs": 21,
+      "revelation": "Meccan",
+      "letters": 333,
+      "top_letter": [
+        "ل",
+        43
+      ],
+      "top3": [
+        [
+          "ل",
+          43
+        ],
+        [
+          "ى",
+          27
+        ],
+        [
+          "ن",
+          23
+        ]
+      ]
+    },
+    {
+      "num": 93,
+      "name_en": "Ad-Dhuhaa",
+      "name_ar": "سُورَةُ الضُّحَىٰ",
+      "ayahs": 11,
+      "revelation": "Meccan",
+      "letters": 185,
+      "top_letter": [
+        "ل",
+        22
+      ],
+      "top3": [
+        [
+          "ل",
+          22
+        ],
+        [
+          "ا",
+          16
+        ],
+        [
+          "و",
+          15
+        ]
+      ]
+    },
+    {
+      "num": 94,
+      "name_en": "Ash-Sharh",
+      "name_ar": "سُورَةُ الشَّرۡحِ",
+      "ayahs": 8,
+      "revelation": "Meccan",
+      "letters": 121,
+      "top_letter": [
+        "ر",
+        15
+      ],
+      "top3": [
+        [
+          "ر",
+          15
+        ],
+        [
+          "ل",
+          11
+        ],
+        [
+          "ن",
+          9
+        ]
+      ]
+    },
+    {
+      "num": 95,
+      "name_en": "At-Tin",
+      "name_ar": "سُورَةُ التِّينِ",
+      "ayahs": 8,
+      "revelation": "Meccan",
+      "letters": 176,
+      "top_letter": [
+        "ل",
+        25
+      ],
+      "top3": [
+        [
+          "ل",
+          25
+        ],
+        [
+          "ن",
+          18
+        ],
+        [
+          "م",
+          14
+        ]
+      ]
+    },
+    {
+      "num": 96,
+      "name_en": "Al-Alaq",
+      "name_ar": "سُورَةُ العَلَقِ",
+      "ayahs": 19,
+      "revelation": "Meccan",
+      "letters": 304,
+      "top_letter": [
+        "ل",
+        42
+      ],
+      "top3": [
+        [
+          "ل",
+          42
+        ],
+        [
+          "ن",
+          25
+        ],
+        [
+          "ٱ",
+          23
+        ]
+      ]
+    },
+    {
+      "num": 97,
+      "name_en": "Al-Qadr",
+      "name_ar": "سُورَةُ القَدۡرِ",
+      "ayahs": 5,
+      "revelation": "Meccan",
+      "letters": 131,
+      "top_letter": [
+        "ل",
+        23
+      ],
+      "top3": [
+        [
+          "ل",
+          23
+        ],
+        [
+          "م",
+          12
+        ],
+        [
+          "ر",
+          12
+        ]
+      ]
+    },
+    {
+      "num": 98,
+      "name_en": "Al-Bayyina",
+      "name_ar": "سُورَةُ البَيِّنَةِ",
+      "ayahs": 8,
+      "revelation": "Medinan",
+      "letters": 416,
+      "top_letter": [
+        "ل",
+        49
+      ],
+      "top3": [
+        [
+          "ل",
+          49
+        ],
+        [
+          "ن",
+          35
+        ],
+        [
+          "م",
+          32
+        ]
+      ]
+    },
+    {
+      "num": 99,
+      "name_en": "Az-Zalzala",
+      "name_ar": "سُورَةُ الزَّلۡزَلَةِ",
+      "ayahs": 8,
+      "revelation": "Medinan",
+      "letters": 175,
+      "top_letter": [
+        "ل",
+        22
+      ],
+      "top3": [
+        [
+          "ل",
+          22
+        ],
+        [
+          "ا",
+          19
+        ],
+        [
+          "ر",
+          15
+        ]
+      ]
+    },
+    {
+      "num": 100,
+      "name_en": "Al-Aadiyaat",
+      "name_ar": "سُورَةُ العَادِيَاتِ",
+      "ayahs": 11,
+      "revelation": "Meccan",
+      "letters": 183,
+      "top_letter": [
+        "ل",
+        22
+      ],
+      "top3": [
+        [
+          "ل",
+          22
+        ],
+        [
+          "ب",
+          12
+        ],
+        [
+          "م",
+          12
+        ]
+      ]
+    },
+    {
+      "num": 101,
+      "name_en": "Al-Qaari'a",
+      "name_ar": "سُورَةُ القَارِعَةِ",
+      "ayahs": 11,
+      "revelation": "Meccan",
+      "letters": 177,
+      "top_letter": [
+        "م",
+        19
+      ],
+      "top3": [
+        [
+          "م",
+          19
+        ],
+        [
+          "ا",
+          17
+        ],
+        [
+          "ل",
+          15
+        ]
+      ]
+    },
+    {
+      "num": 102,
+      "name_en": "At-Takaathur",
+      "name_ar": "سُورَةُ التَّكَاثُرِ",
+      "ayahs": 8,
+      "revelation": "Meccan",
+      "letters": 142,
+      "top_letter": [
+        "ل",
+        23
+      ],
+      "top3": [
+        [
+          "ل",
+          23
+        ],
+        [
+          "م",
+          16
+        ],
+        [
+          "ن",
+          12
+        ]
+      ]
+    },
+    {
+      "num": 103,
+      "name_en": "Al-Asr",
+      "name_ar": "سُورَةُ العَصۡرِ",
+      "ayahs": 3,
+      "revelation": "Meccan",
+      "letters": 90,
+      "top_letter": [
+        "ل",
+        14
+      ],
+      "top3": [
+        [
+          "ل",
+          14
+        ],
+        [
+          "و",
+          10
+        ],
+        [
+          "ٱ",
+          9
+        ]
+      ]
+    },
+    {
+      "num": 104,
+      "name_en": "Al-Humaza",
+      "name_ar": "سُورَةُ الهُمَزَةِ",
+      "ayahs": 9,
+      "revelation": "Meccan",
+      "letters": 153,
+      "top_letter": [
+        "ل",
+        24
+      ],
+      "top3": [
+        [
+          "ل",
+          24
+        ],
+        [
+          "م",
+          18
+        ],
+        [
+          "ٱ",
+          10
+        ]
+      ]
+    },
+    {
+      "num": 105,
+      "name_en": "Al-Fil",
+      "name_ar": "سُورَةُ الفِيلِ",
+      "ayahs": 5,
+      "revelation": "Meccan",
+      "letters": 115,
+      "top_letter": [
+        "ل",
+        18
+      ],
+      "top3": [
+        [
+          "ل",
+          18
+        ],
+        [
+          "م",
+          12
+        ],
+        [
+          "ي",
+          11
+        ]
+      ]
+    },
+    {
+      "num": 106,
+      "name_en": "Quraish",
+      "name_ar": "سُورَةُ قُرَيۡشٍ",
+      "ayahs": 4,
+      "revelation": "Meccan",
+      "letters": 94,
+      "top_letter": [
+        "ل",
+        13
+      ],
+      "top3": [
+        [
+          "ل",
+          13
+        ],
+        [
+          "م",
+          10
+        ],
+        [
+          "ٱ",
+          7
+        ]
+      ]
+    },
+    {
+      "num": 107,
+      "name_en": "Al-Maa'un",
+      "name_ar": "سُورَةُ المَاعُونِ",
+      "ayahs": 7,
+      "revelation": "Meccan",
+      "letters": 133,
+      "top_letter": [
+        "ل",
+        20
+      ],
+      "top3": [
+        [
+          "ل",
+          20
+        ],
+        [
+          "ي",
+          15
+        ],
+        [
+          "م",
+          12
+        ]
+      ]
+    },
+    {
+      "num": 108,
+      "name_en": "Al-Kawthar",
+      "name_ar": "سُورَةُ الكَوۡثَرِ",
+      "ayahs": 3,
+      "revelation": "Meccan",
+      "letters": 61,
+      "top_letter": [
+        "ل",
+        8
+      ],
+      "top3": [
+        [
+          "ل",
+          8
+        ],
+        [
+          "ٱ",
+          6
+        ],
+        [
+          "ر",
+          6
+        ]
+      ]
+    },
+    {
+      "num": 109,
+      "name_en": "Al-Kaafiroon",
+      "name_ar": "سُورَةُ الكَافِرُونَ",
+      "ayahs": 6,
+      "revelation": "Meccan",
+      "letters": 114,
+      "top_letter": [
+        "م",
+        12
+      ],
+      "top3": [
+        [
+          "م",
+          12
+        ],
+        [
+          "ل",
+          12
+        ],
+        [
+          "ا",
+          11
+        ]
+      ]
+    },
+    {
+      "num": 110,
+      "name_en": "An-Nasr",
+      "name_ar": "سُورَةُ النَّصۡرِ",
+      "ayahs": 3,
+      "revelation": "Medinan",
+      "letters": 99,
+      "top_letter": [
+        "ل",
+        11
+      ],
+      "top3": [
+        [
+          "ل",
+          11
+        ],
+        [
+          "ٱ",
+          8
+        ],
+        [
+          "ا",
+          8
+        ]
+      ]
+    },
+    {
+      "num": 111,
+      "name_en": "Al-Masad",
+      "name_ar": "سُورَةُ المَسَدِ",
+      "ayahs": 5,
+      "revelation": "Meccan",
+      "letters": 100,
+      "top_letter": [
+        "ل",
+        11
+      ],
+      "top3": [
+        [
+          "ل",
+          11
+        ],
+        [
+          "م",
+          10
+        ],
+        [
+          "ب",
+          9
+        ]
+      ]
+    },
+    {
+      "num": 112,
+      "name_en": "Al-Ikhlaas",
+      "name_ar": "سُورَةُ الإِخۡلَاصِ",
+      "ayahs": 4,
+      "revelation": "Meccan",
+      "letters": 66,
+      "top_letter": [
+        "ل",
+        16
+      ],
+      "top3": [
+        [
+          "ل",
+          16
+        ],
+        [
+          "م",
+          7
+        ],
+        [
+          "ٱ",
+          6
+        ]
+      ]
+    },
+    {
+      "num": 113,
+      "name_en": "Al-Falaq",
+      "name_ar": "سُورَةُ الفَلَقِ",
+      "ayahs": 5,
+      "revelation": "Meccan",
+      "letters": 90,
+      "top_letter": [
+        "ل",
+        10
+      ],
+      "top3": [
+        [
+          "ل",
+          10
+        ],
+        [
+          "م",
+          8
+        ],
+        [
+          "ر",
+          7
+        ]
+      ]
+    },
+    {
+      "num": 114,
+      "name_en": "An-Naas",
+      "name_ar": "سُورَةُ النَّاسِ",
+      "ayahs": 6,
+      "revelation": "Meccan",
+      "letters": 99,
+      "top_letter": [
+        "ل",
+        16
+      ],
+      "top3": [
+        [
+          "ل",
+          16
+        ],
+        [
+          "ٱ",
+          12
+        ],
+        [
+          "س",
+          11
+        ]
+      ]
+    }
+  ],
+  "analysis": {
+    "ayah_count_stats": {
+      "min": 3,
+      "max": 286,
+      "mean": 54.70175438596491,
+      "total": 6236,
+      "primes": 32,
+      "even": 60,
+      "odd": 54,
+      "divisible_by_7": 14,
+      "divisible_by_19": 4
+    },
+    "letter_count_stats": {
+      "min": 61,
+      "max": 25918,
+      "total": 328288,
+      "divisible_by_19": 7,
+      "divisible_by_7": 17,
+      "primes": 17
+    },
+    "total_ayahs_is_prime": false,
+    "total_letters_divisible_by_19": false,
+    "total_physical_constants": {
+      "pi": {
+        "k": 6236,
+        "ratio": 52.64400256574727,
+        "diff": 49.502409912157475
+      },
+      "e": {
+        "k": 6236,
+        "ratio": 52.64400256574727,
+        "diff": 49.92572073728822
+      },
+      "phi": {
+        "k": 6236,
+        "ratio": 52.64400256574727,
+        "diff": 51.02596857699738
+      }
+    },
+    "surah_ayah_correlation_matches": [
+      [
+        30,
+        "Ar-Room",
+        60,
+        0.5
+      ],
+      [
+        49,
+        "Al-Hujuraat",
+        18,
+        2.722222
+      ]
+    ],
+    "global_letter_freq_top28": [],
+    "odd_vs_even": {
+      "odd": {
+        "count": 57,
+        "total_ayahs": 3031,
+        "total_letters": 154812
+      },
+      "even": {
+        "count": 57,
+        "total_ayahs": 3205,
+        "total_letters": 173476
+      }
+    },
+    "mushaf_structure": {
+      "total_surahs": 114,
+      "total_juz": 30,
+      "114_is_composite": true,
+      "30_is_composite": true,
+      "114_over_30": 3.8,
+      "product_114x30": 3420
+    },
+    "revelation_split": {
+      "meccan": {
+        "count": 86,
+        "total_ayahs": 4613,
+        "total_letters": 199068
+      },
+      "medinan": {
+        "count": 28,
+        "total_ayahs": 1623,
+        "total_letters": 129220
+      }
+    }
+  }
+}
