@@ -41,31 +41,55 @@ function collectTerms(node: MathNode): Map<string, number> {
     if (n.kind === 'binop' && n.op === '+') { walk(n.left, sign); walk(n.right, sign); return; }
     if (n.kind === 'binop' && n.op === '-') { walk(n.left, sign); walk(n.right, -sign); return; }
     if (n.kind === 'binop' && n.op === '*') {
-      // Handle x*x as x^2
-      if (n.left.kind === 'var' && n.right.kind === 'var' && n.left.name === n.right.name) {
-        const varName = n.left.name;
-        const key = `${varName}^2`;
-        terms.set(key, (terms.get(key) ?? 0) + sign);
-        return;
+      const powers = new Map<string, number>();
+      let coeff = collectPowerFactors(n, powers);
+      for (const [varName, exp] of powers) {
+        const key = exp === 1 ? varName : `${varName}^${exp}`;
+        terms.set(key, (terms.get(key) ?? 0) + sign * coeff);
       }
-      const lc = extractConstFactor(n.left);
-      const rc = extractConstFactor(n.right);
-      const coeff = lc * rc;
-      const vLeft = stripConst(n.left);
-      const vRight = stripConst(n.right);
-      // 'key' unused; retained for future extensions
-      const monomial = multiplyMonomials(vLeft, vRight);
-      const mk = nodeToKey(monomial);
-      terms.set(mk, (terms.get(mk) ?? 0) + sign * coeff);
       return;
     }
     if (n.kind === 'pow' && n.base.kind === 'var' && n.exp.kind === 'num') { const k = nodeToKey(n); terms.set(k, (terms.get(k) ?? 0) + sign); return; }
-    // redundant pow case removed
     const fallback = evaluate(n, {}) ?? 0;
     if (Number.isFinite(fallback)) { terms.set('_const', (terms.get('_const') ?? 0) + sign * fallback); return; }
   }
   walk(node, 1);
   return terms;
+}
+
+/**
+ * Collects the exponent of each variable across a product tree and
+ * returns the constant multiplier. Handles x*x -> x^2, x*x*x -> x^3,
+ * (x^2)*(x^3) -> x^5, and mixed constant coefficients.
+ */
+function collectPowerFactors(node: MathNode, powers: Map<string, number>): number {
+  if (node.kind === 'num') return node.value;
+  if (node.kind === 'var') {
+    powers.set(node.name, (powers.get(node.name) ?? 0) + 1);
+    return 1;
+  }
+  if (node.kind === 'unary' && node.op === '-') return -collectPowerFactors(node.operand, powers);
+  if (node.kind === 'binop' && node.op === '*') {
+    return collectPowerFactors(node.left, powers) * collectPowerFactors(node.right, powers);
+  }
+  if (node.kind === 'binop' && node.op === '/') {
+    const denom = new Map<string, number>();
+    const num = collectPowerFactors(node.left, powers);
+    const den = collectPowerFactors(node.right, denom);
+    for (const [varName, exp] of denom) {
+      powers.set(varName, (powers.get(varName) ?? 0) - exp);
+    }
+    return den !== 0 ? num / den : NaN;
+  }
+  if (node.kind === 'pow' && node.base.kind === 'var' && node.exp.kind === 'num') {
+    powers.set(node.base.name, (powers.get(node.base.name) ?? 0) + node.exp.value);
+    return 1;
+  }
+  if (node.kind === 'pow' && node.base.kind === 'num' && node.exp.kind === 'num') {
+    return Math.pow(node.base.value, node.exp.value);
+  }
+  const coeff = extractConstFactor(node);
+  return Number.isFinite(coeff) ? coeff : 1;
 }
 
 function extractConstFactor(node: MathNode): number {
@@ -79,32 +103,12 @@ function extractConstFactor(node: MathNode): number {
   return 1;
 }
 
-function stripConst(node: MathNode): MathNode {
-  if (node.kind === 'num') return N(1);
-  if (node.kind === 'unary' && node.op === '-') return stripConst(node.operand);
-  if (node.kind === 'binop' && node.op === '*') {
-    const lc = node.left.kind === 'num' ? N(1) : node.left;
-    const rc = node.right.kind === 'num' ? N(1) : node.right;
-    if (lc.kind === 'num' && lc.value === 1) return rc;
-    if (rc.kind === 'num' && rc.value === 1) return lc;
-    return Mul(stripConst(node.left), stripConst(node.right));
-  }
-  return node;
-}
-
 function nodeToKey(node: MathNode): string {
   if (node.kind === 'var') return node.name;
   if (node.kind === 'num') return `${node.value}`;
   if (node.kind === 'pow' && node.base.kind === 'var' && node.exp.kind === 'num') return `${node.base.name}^${node.exp.value}`;
   if (node.kind === 'unary' && node.op === '-') return `-${nodeToKey(node.operand)}`;
   return JSON.stringify(node);
-}
-
-function multiplyMonomials(a: MathNode, b: MathNode): MathNode {
-  if (a.kind === 'num' && a.value === 1) return b;
-  if (b.kind === 'num' && b.value === 1) return a;
-  if (a.kind === 'num' && b.kind === 'num') return N(a.value * b.value);
-  return Mul(a, b);
 }
 
 function extractPolyCoeffs(eq: MathNode, v: string): PolyCoeffs | null {
