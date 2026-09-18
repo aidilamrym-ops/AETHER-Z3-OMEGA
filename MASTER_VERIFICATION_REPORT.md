@@ -1,6 +1,6 @@
 # MASTER VERIFICATION REPORT
 
-**Tanggal: 2026-09-18 15:23:53**
+**Tanggal: 2026-09-18 15:59:06**
 **Total Test: 34**
 **PASS: 34 (100.0%)**
 **FAIL: 0**
@@ -14,40 +14,40 @@ Hasil dibandingkan dengan expected result. Semua hasil dapat diverifikasi ulang.
 
 | # | Kategori | Nama Test | Expected | Actual | Waktu (ms) | Status |
 |---|----------|-----------|----------|--------|-----------|--------|
-| 1 | QADAR | QADAR: MAX_PARTICLES=1e80 bounded | SAT | SAT | 5.989 | PASS |
-| 2 | QADAR | QADAR: entity_count > MAX_PARTICLES is UNSAT (violated) | UNSAT | UNSAT | 1.313 | PASS |
-| 3 | HISAB | HISAB: state_space <= 10^120 bits | SAT | SAT | 3.661 | PASS |
-| 4 | HISAB | HISAB: state_space explosion UNSAT | UNSAT | UNSAT | 1.642 | PASS |
-| 5 | MIZAN | MIZAN: dE/dt = 0 (energy conservation) | UNSAT | UNSAT | 3.933 | PASS |
-| 6 | MIZAN | MIZAN: DeltaQ = 0 (isentropic) | UNSAT | UNSAT | 1.234 | PASS |
-| 7 | GHAYB | GHAYB: K < -1 (Anosov Chaos blocks QFT/Shor) | UNSAT | UNSAT | 1.117 | PASS |
-| 8 | KURSI | KURSI: Moyal commutation [x_i,x_j]=i*theta | SAT | SAT | 1.054 | PASS |
-| 9 | KURSI | KURSI: uncertainty principle Violation UNSAT | UNSAT | UNSAT | 1.101 | PASS |
-| 10 | MILLENNIUM-NS | NS: Energy blowup impossible | UNSAT | UNSAT | 3.229 | PASS |
-| 11 | MILLENNIUM-YM | YM: Delta=0 impossible (mass gap) | UNSAT | UNSAT | 1.791 | PASS |
-| 12 | MILLENNIUM-PNP | PvsNP: n > 398 exceeds Hisab bound | UNSAT | UNSAT | 2.249 | PASS |
-| 13 | MILLENNIUM-RH | RH: Off-critical zero impossible | UNSAT | UNSAT | 2.593 | PASS |
-| 14 | MILLENNIUM-POINCARE | Poincare: diameter > bound impossible | UNSAT | UNSAT | 2.336 | PASS |
-| 15 | DIVISION | DIV: div(x,y,z) <-> y!=0 AND y*z=x | SAT | SAT | 2.481 | PASS |
-| 16 | DIVISION | DIV: Division by zero impossible | UNSAT | UNSAT | 3.048 | PASS |
-| 17 | DIVISION | DIV: 6/2=3 valid | SAT | SAT | 3.804 | PASS |
-| 18 | LIMIT-H10 | H10: x^2 + 1 = 0 has no Z solution | UNSAT | UNSAT | 8.456 | PASS |
-| 19 | LIMIT-GODEL | Godel: self-reference G = not G | UNSAT | UNSAT | 1.179 | PASS |
-| 20 | LIMIT-EXPTIME | EXPTIME: x^4 = 1 (SAT) | SAT | SAT | 5.841 | PASS |
-| 21 | LIMIT-EXPTIME | EXPTIME: x^8 = 1 (SAT) | SAT | SAT | 5.587 | PASS |
-| 22 | LIMIT-EXPTIME | EXPTIME: x^16 = 1 (SAT) | SAT | SAT | 8.917 | PASS |
-| 23 | LIMIT-EXPTIME | EXPTIME: x^32 = 1 (SAT) | SAT | SAT | 11.255 | PASS |
-| 24 | GNASE | GNASE: Xi Absolute finite and consistent | SAT | SAT | 1.120 | PASS |
-| 25 | GNASE | GNASE: Contradiction in grand equation impossible | UNSAT | UNSAT | 1.425 | PASS |
-| 26 | AMNESIA | Amnesia: DeltaQ = 0 isentropic wipe | SAT | SAT | 1.915 | PASS |
-| 27 | AMNESIA | Amnesia: DeltaQ > 0 violates isentropic law | UNSAT | UNSAT | 1.829 | PASS |
-| 28 | OBSTRUCTION | Obstruction: injection infinite -> finite impossible | UNSAT | UNSAT | 1.276 | PASS |
-| 29 | OBSTRUCTION | Obstruction: zeta zeros infinite (N=100) | UNSAT | UNSAT | 1.065 | PASS |
+| 1 | QADAR | QADAR: MAX_PARTICLES=1e80 bounded | SAT | SAT | 9.350 | PASS |
+| 2 | QADAR | QADAR: entity_count > MAX_PARTICLES is UNSAT (violated) | UNSAT | UNSAT | 2.224 | PASS |
+| 3 | HISAB | HISAB: state_space <= 10^120 bits | SAT | SAT | 5.133 | PASS |
+| 4 | HISAB | HISAB: state_space explosion UNSAT | UNSAT | UNSAT | 1.859 | PASS |
+| 5 | MIZAN | MIZAN: dE/dt = 0 (energy conservation) | UNSAT | UNSAT | 4.194 | PASS |
+| 6 | MIZAN | MIZAN: DeltaQ = 0 (isentropic) | UNSAT | UNSAT | 1.221 | PASS |
+| 7 | GHAYB | GHAYB: K < -1 (Anosov Chaos blocks QFT/Shor) | UNSAT | UNSAT | 1.125 | PASS |
+| 8 | KURSI | KURSI: Moyal commutation [x_i,x_j]=i*theta | SAT | SAT | 1.067 | PASS |
+| 9 | KURSI | KURSI: uncertainty principle Violation UNSAT | UNSAT | UNSAT | 1.005 | PASS |
+| 10 | MILLENNIUM-NS | NS: Energy blowup impossible | UNSAT | UNSAT | 3.192 | PASS |
+| 11 | MILLENNIUM-YM | YM: Delta=0 impossible (mass gap) | UNSAT | UNSAT | 2.064 | PASS |
+| 12 | MILLENNIUM-PNP | PvsNP: n > 398 exceeds Hisab bound | UNSAT | UNSAT | 2.876 | PASS |
+| 13 | MILLENNIUM-RH | RH: Off-critical zero impossible | UNSAT | UNSAT | 3.227 | PASS |
+| 14 | MILLENNIUM-POINCARE | Poincare: diameter > bound impossible | UNSAT | UNSAT | 3.011 | PASS |
+| 15 | DIVISION | DIV: div(x,y,z) <-> y!=0 AND y*z=x | SAT | SAT | 4.134 | PASS |
+| 16 | DIVISION | DIV: Division by zero impossible | UNSAT | UNSAT | 2.688 | PASS |
+| 17 | DIVISION | DIV: 6/2=3 valid | SAT | SAT | 3.126 | PASS |
+| 18 | LIMIT-H10 | H10: x^2 + 1 = 0 has no Z solution | UNSAT | UNSAT | 10.253 | PASS |
+| 19 | LIMIT-GODEL | Godel: self-reference G = not G | UNSAT | UNSAT | 2.080 | PASS |
+| 20 | LIMIT-EXPTIME | EXPTIME: x^4 = 1 (SAT) | SAT | SAT | 10.862 | PASS |
+| 21 | LIMIT-EXPTIME | EXPTIME: x^8 = 1 (SAT) | SAT | SAT | 6.055 | PASS |
+| 22 | LIMIT-EXPTIME | EXPTIME: x^16 = 1 (SAT) | SAT | SAT | 7.556 | PASS |
+| 23 | LIMIT-EXPTIME | EXPTIME: x^32 = 1 (SAT) | SAT | SAT | 11.781 | PASS |
+| 24 | GNASE | GNASE: Xi Absolute finite and consistent | SAT | SAT | 1.236 | PASS |
+| 25 | GNASE | GNASE: Contradiction in grand equation impossible | UNSAT | UNSAT | 1.460 | PASS |
+| 26 | AMNESIA | Amnesia: DeltaQ = 0 isentropic wipe | SAT | SAT | 2.038 | PASS |
+| 27 | AMNESIA | Amnesia: DeltaQ > 0 violates isentropic law | UNSAT | UNSAT | 1.560 | PASS |
+| 28 | OBSTRUCTION | Obstruction: injection infinite -> finite impossible | UNSAT | UNSAT | 1.356 | PASS |
+| 29 | OBSTRUCTION | Obstruction: zeta zeros infinite (N=100) | UNSAT | UNSAT | 1.103 | PASS |
 | 30 | OBSTRUCTION | Obstruction: zeta zeros infinite (N=1000) | UNSAT | UNSAT | 1.095 | PASS |
-| 31 | OBSTRUCTION | Obstruction: zeta zeros infinite (N=10000) | UNSAT | UNSAT | 1.152 | PASS |
-| 32 | DETERMINISM | Det: Z3 deterministic (same input -> same output) | SAT | SAT | 4.927 | PASS |
-| 33 | DETERMINISM | Anti-hallucination: contradiction detected | UNSAT | UNSAT | 1.051 | PASS |
-| 34 | DETERMINISM | Zero-backend: local execution | SAT | SAT | 1.706 | PASS |
+| 31 | OBSTRUCTION | Obstruction: zeta zeros infinite (N=10000) | UNSAT | UNSAT | 1.266 | PASS |
+| 32 | DETERMINISM | Det: Z3 deterministic (same input -> same output) | SAT | SAT | 5.388 | PASS |
+| 33 | DETERMINISM | Anti-hallucination: contradiction detected | UNSAT | UNSAT | 1.238 | PASS |
+| 34 | DETERMINISM | Zero-backend: local execution | SAT | SAT | 1.729 | PASS |
 
 ## SMT-LIB2 Sources
 
