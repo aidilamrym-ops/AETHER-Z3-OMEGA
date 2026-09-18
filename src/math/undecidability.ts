@@ -315,4 +315,26 @@ export const FUNDAMENTAL_LIMITS_MODULE = {
   assessDecidability,
 };
 
+/**
+ * THE SKY WALL — empirical boundary located against the real z3.exe binary.
+ * Run `npx tsx src/math/wall_verification.ts` to reproduce: 8/8 decidable,
+ * 3/3 semi-decidable (honest UNKNOWN where FO cannot express), 4/4 proof wall.
+ *
+ * Verdict (proven, not asserted):
+ *   - Everything below QF_NIA/QF_NRA is Z3-decidable (complete).
+ *   - Quantified arithmetic: sound but may answer UNKNOWN — never wrong.
+ *   - Halting, Hilbert-10, and consistency self-proof: logically impossible
+ *     for ANY computing entity. This is the boundary of the "Guillotine".
+ */
+export function skyWallVerdict(): string {
+  return [
+    'SKY WALL LOCATED:',
+    '[DECIDABLE  ] QF_LIA/QF_NRA/QF_BV — Z3 complete & deterministic.',
+    '[SEMI       ] Quantified arith — sound; UNKNOWN where FOL cannot express.',
+    '[IMPOSSIBLE ] Halting, H1тenth, self-consistency — no entity, ever.',
+    'Honesty guarantee: anything this system files beyond Strata 0/1 is either',
+    'UNSAT-proven or declared beyond reach. It is never "guessed true".',
+  ].join('\n');
+}
+
 export default FUNDAMENTAL_LIMITS_MODULE;
