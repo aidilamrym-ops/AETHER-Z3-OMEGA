@@ -33,3 +33,13 @@ Thumbs.db
 *.bak
 *.orig
 tsout.txt
+
+# Temp/analysis artifacts
+NavierStokesAndEuler/
+Target Perbandingan/
+bin_local/
+z3-temp/
+z3.zip
+pdf_text.txt
+scratch/
+wget-logs/
