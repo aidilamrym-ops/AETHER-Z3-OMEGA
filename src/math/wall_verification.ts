@@ -35,7 +35,7 @@ function runZ3(smt: string, timeoutMs = 10000): string {
   writeFileSync(tmp, smt, 'utf8');
   try {
     const out = execFileSync(Z3, ['-smt2', tmp], { timeout: timeoutMs, encoding: 'utf8' }).trim();
-    return (out.split('\n')[0] ?? 'EMPTY').toUpperCase();
+    return (out.split('\n')[0] ?? '').replace(/\r/g, '').trim().toUpperCase();
   } catch (e: unknown) {
     const err = e as { code?: string; signal?: string; message?: string };
     if (err.code === 'ETIMEDOUT' || err.signal === 'SIGTERM' || (err.message ?? '').includes('TIMEOUT')) {
