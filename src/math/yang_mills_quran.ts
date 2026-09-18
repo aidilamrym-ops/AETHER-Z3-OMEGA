@@ -46,11 +46,12 @@ const { constants } = FINITISM_QURAN_MODULE;
 export function generateYangMillsSMT(config: YangMillsConfig): string {
   const { latticeSize, coupling, maxIterations } = config;
 
-  return `${generateQuranicSMTLibrary()}
+return `${generateQuranicSMTLibrary()}
 
-; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-; YANG-MILLS SU(2) LATTICE CONFIGURATION
-; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; YANG-MILLS SU(2) LATTICE CONFIGURATION — UF + Linear Int Arith + Quantifiers
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(set-logic UFLIA)
 (define-fun LATTICE_N () Int ${latticeSize})
 (define-fun COUPLING () Real ${coupling.toFixed(6)})
 (define-fun TOTAL_LINKS () Int (* ${latticeSize} ${latticeSize} ${latticeSize} ${latticeSize} 4))

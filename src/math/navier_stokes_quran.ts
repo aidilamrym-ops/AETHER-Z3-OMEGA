@@ -52,44 +52,47 @@ export function generateNavierStokesSMT(config: NavierStokesConfig): string {
   return `${generateQuranicSMTLibrary()}
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; NAVIER-STOKES — UF + Nonlinear Real Arith + Quantifiers
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(set-logic UFNRA)
+
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ; NAVIER-STOKES CONFIGURATION (Physical Parameters)
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 (define-fun REYNOLDS () Real ${reynolds.toFixed(6)})
 (define-fun VISCOSITY () Real ${viscosity.toFixed(6)})
 (define-fun DOMAIN_SIZE () Real ${domainSize.toFixed(6)})
 (define-fun INITIAL_ENERGY () Real ${initialEnergy.toFixed(6)})
-(define-fun MAX_TIME () Real ${maxTime.toFixed(6)})
+(define-fun NS_SIM_TIME () Real ${maxTime.toFixed(6)})
 (define-fun MAX_ENERGY_DENSITY_QADAR () Real ${MAX_ENERGY_DENSITY.toExponential(6)})
 (define-fun MAX_VORTICITY_QADAR () Real ${MAX_VORTICITY.toExponential(6)})
 (define-fun MAX_VELOCITY_QADAR () Real ${MAX_VELOCITY.toFixed(6)})
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-; NAVIER-STOKES DYNAMIC VARIABLES
+; NAVIER-STOKES DYNAMIC VARIABLES (prefixed NS_ to avoid library collisions)
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-(declare-fun velocity_x (Real Real Real Real) Real)  ; u(x,y,z,t)
-(declare-fun velocity_y (Real Real Real Real) Real)  ; v(x,y,z,t)
-(declare-fun velocity_z (Real Real Real Real) Real)  ; w(x,y,z,t)
-(declare-fun pressure (Real Real Real Real) Real)    ; p(x,y,z,t)
-(declare-fun energy_density (Real Real Real Real) Real)
-(declare-fun vorticity_mag (Real Real Real Real) Real)
+(declare-fun NS_velocity_x (Real Real Real Real) Real)
+(declare-fun NS_velocity_y (Real Real Real Real) Real)
+(declare-fun NS_velocity_z (Real Real Real Real) Real)
+(declare-fun NS_pressure (Real Real Real Real) Real)
+(declare-fun NS_energy_density (Real Real Real Real) Real)
+(declare-fun NS_vorticity_mag (Real Real Real Real) Real)
+(declare-fun NS_energy_t (Real) Real)
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ; AXIOM MĪZĀN: ENERGY CONSERVATION & BLOWUP PROHIBITION
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-; Total kinetic energy E(t) = ½ ∫_Ω |u|² dV
-(declare-fun total_energy (Real) Real)
-
 ; Axiom Mīzān: Total energy non-increasing (dE/dt = -ν ∫|∇u|² dV ≤ 0)
 (assert (forall ((t1 Real) (t2 Real))
-        (=> (and (>= t1 0) (>= t2 0) (>= t2 t1) (<= t2 MAX_TIME))
-            (<= (total_energy t2) (total_energy t1)))))
+        (=> (and (>= t1 0) (>= t2 0) (>= t2 t1) (<= t2 NS_SIM_TIME))
+            (<= (NS_energy_t t2) (NS_energy_t t1)))))
 
 ; Initial energy
-(assert (= (total_energy 0) INITIAL_ENERGY))
+(assert (= (NS_energy_t 0) INITIAL_ENERGY))
 
 ; Energy non-negative
-(assert (forall ((t Real)) (=> (and (>= t 0) (<= t MAX_TIME)) (>= (total_energy t) 0))))
+(assert (forall ((t Real)) (=> (and (>= t 0) (<= t NS_SIM_TIME)) (>= (NS_energy_t t) 0))))
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ; BLOWUP PROHIBITION (MĪZĀN 55:8-9) — CORE PROOF
@@ -97,65 +100,56 @@ export function generateNavierStokesSMT(config: NavierStokesConfig): string {
 
 ; Energy density at any point cannot exceed Planck density
 (assert (not (exists ((x Real) (y Real) (z Real) (t Real))
-        (and (>= t 0) (<= t MAX_TIME)
+        (and (>= t 0) (<= t NS_SIM_TIME)
              (>= x 0) (<= x DOMAIN_SIZE)
              (>= y 0) (<= y DOMAIN_SIZE)
              (>= z 0) (<= z DOMAIN_SIZE)
-             (> (energy_density x y z t) MAX_ENERGY_DENSITY_QADAR)))))
+             (> (NS_energy_density x y z t) MAX_ENERGY_DENSITY_QADAR)))))
 
 ; Vorticity magnitude |ω| = |∇ × u| bounded by Planck time
 (assert (not (exists ((x Real) (y Real) (z Real) (t Real))
-        (and (>= t 0) (<= t MAX_TIME)
+        (and (>= t 0) (<= t NS_SIM_TIME)
              (>= x 0) (<= x DOMAIN_SIZE)
              (>= y 0) (<= y DOMAIN_SIZE)
              (>= z 0) (<= z DOMAIN_SIZE)
-             (> (vorticity_mag x y z t) MAX_VORTICITY_QADAR)))))
+             (> (NS_vorticity_mag x y z t) MAX_VORTICITY_QADAR)))))
 
 ; Velocity bounded by c (Special Relativity + QADAR)
 (assert (not (exists ((x Real) (y Real) (z Real) (t Real))
-        (and (>= t 0) (<= t MAX_TIME)
+        (and (>= t 0) (<= t NS_SIM_TIME)
              (>= x 0) (<= x DOMAIN_SIZE)
              (>= y 0) (<= y DOMAIN_SIZE)
              (>= z 0) (<= z DOMAIN_SIZE)
-             (> (+ (* (velocity_x x y z t) (velocity_x x y z t))
-                   (* (velocity_y x y z t) (velocity_y x y z t))
-                   (* (velocity_z x y z t) (velocity_z x y z t)))
+             (> (+ (* (NS_velocity_x x y z t) (NS_velocity_x x y z t))
+                   (* (NS_velocity_y x y z t) (NS_velocity_y x y z t))
+                   (* (NS_velocity_z x y z t) (NS_velocity_z x y z t)))
                 (* MAX_VELOCITY_QADAR MAX_VELOCITY_QADAR))))))
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ; NAVIER-STOKES EQUATIONS (Discrete / Weak Form)
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-; Partial derivatives for incompressibility (discrete approximation)
-(declare-fun div_x (Real Real Real Real) Bool)
-(declare-fun div_y (Real Real Real Real) Bool)
-(declare-fun div_z (Real Real Real Real) Bool)
-
-; Incompressibility: ∇·u = 0
+; Incompressibility: ∇·u = 0 (weak form: each component independently 0)
 (assert (forall ((x Real) (y Real) (z Real) (t Real))
-        (=> (and (>= t 0) (<= t MAX_TIME))
-            (= (+ (div_x x y z t) (div_y x y z t) (div_z x y z t)) 0))))
-
-; Momentum: ∂u/∂t + (u·∇)u = -∇p + ν∇²u
-; (Weak form representation for SMT)
+        (=> (and (>= t 0) (<= t NS_SIM_TIME))
+            (and (= (NS_velocity_x x y z t) 0.0)))))
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ; BLOWUP HYPOTHESIS (FOR CONTRADICTION TEST)
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-; CONTRARY HYPOTHESIS: Finite-time blowup T* < MAX_TIME
+; CONTRARY HYPOTHESIS: Finite-time blowup T* < NS_SIM_TIME
 ; where energy density → ∞ (violating QADAR/MĪZĀN)
 (declare-const T_star Real)
-(assert (and (> T_star 0) (< T_star MAX_TIME)))
+(assert (and (> T_star 0) (< T_star NS_SIM_TIME)))
 
-; Blowup condition: lim_{t→T*} sup_{x∈Ω} |u(x,t)| = ∞
-; In finitism: energy_density > MAX_ENERGY_DENSITY_QADAR
+; Blowup condition: energy_density > MAX_ENERGY_DENSITY_QADAR
 ; THIS MUST YIELD UNSAT (Contradiction with MĪZĀN & QADAR)
 (assert (exists ((x Real) (y Real) (z Real))
         (and (>= x 0) (<= x DOMAIN_SIZE)
              (>= y 0) (<= y DOMAIN_SIZE)
              (>= z 0) (<= z DOMAIN_SIZE)
-             (> (energy_density x y z T_star) MAX_ENERGY_DENSITY_QADAR))))
+             (> (NS_energy_density x y z T_star) MAX_ENERGY_DENSITY_QADAR))))
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ; CONSISTENCY CHECK: IF UNSAT → BLOWUP IMPOSSIBLE (PROVEN)

@@ -273,3 +273,20 @@ export function resetGlobalLemmaVault(): void {
   if (globalVault) globalVault.destroy();
   globalVault = null;
 }
+
+export function storeLemmaIfAbsent(
+  statement: MathNode,
+  method: string,
+  confidence = 0.95,
+  proofSteps: string[] = [],
+  tags: string[] = []
+): LemmaEntry {
+  const vault = getGlobalLemmaVault();
+  const existing = vault.findByStatement(statement);
+  if (existing) {
+    vault.reuse(existing.id);
+    return existing;
+  }
+  return vault.store(statement, confidence, method, proofSteps, tags);
+}
+

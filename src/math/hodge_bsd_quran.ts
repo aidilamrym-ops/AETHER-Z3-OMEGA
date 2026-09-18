@@ -54,11 +54,12 @@ export function generateHodgeBSDSMT(config: HodgeBSDConfig): string {
   return `${generateQuranicSMTLibrary()}
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-; HODGE & BSD CONFIGURATION
+; HODGE & BSD CONFIGURATION — UF + Linear Int Arith + Quantifiers
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(set-logic UFLIA)
 (define-fun COMPLEX_DIM () Int ${complexDim})
 (define-fun CURVE_ORDER () Int ${curveOrder})
-(define-fun MAX_CYCLES_QADAR () Int ${maxRationalCycles})
+(define-fun MAX_CYCLES_HODGE () Real ${maxRationalCycles})
 
 ; Hodge number h^{p,q} for smooth projective variety of complex dimension n
 ; h^{p,q} = h^{q,p} = h^{n-p,n-q}
@@ -69,10 +70,24 @@ export function generateHodgeBSDSMT(config: HodgeBSDConfig): string {
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ; Total rational cohomology classes: Σ h^{p,q} ≤ 10¹²⁰ (KURSI)
-(assert (<= (hodge_number 0 0) MAX_CYCLES_QADAR))
+(assert (<= (hodge_number 0 0) MAX_CYCLES_HODGE))
 (assert (forall ((p Int) (q Int))
         (=> (and (>= p 0) (<= p COMPLEX_DIM) (>= q 0) (<= q COMPLEX_DIM))
-            (<= (hodge_number p q) MAX_CYCLES_QADAR))))
+            (<= (hodge_number p q) MAX_CYCLES_HODGE))))
+
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; HODGE DUALITIES — STRUCTURAL CONSTRAINTS (STRENGTHENED, BS-7)
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+; Hodge symmetry: h^{p,q} = h^{q,p} (complex conjugation duality)
+(assert (forall ((p Int) (q Int))
+        (=> (and (>= p 0) (<= p COMPLEX_DIM) (>= q 0) (<= q COMPLEX_DIM))
+            (= (hodge_number p q) (hodge_number q p)))))
+
+; Poincaré duality: h^{p,q} = h^{n-p,n-q} (topological duality)
+(assert (forall ((p Int) (q Int))
+        (=> (and (>= p 0) (<= p COMPLEX_DIM) (>= q 0) (<= q COMPLEX_DIM))
+            (= (hodge_number p q) (hodge_number (- COMPLEX_DIM p) (- COMPLEX_DIM q))))))
 
 ; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ; AXIOM ḤISĀB — RATIONAL CYCLES COUNTABLE
@@ -82,7 +97,7 @@ export function generateHodgeBSDSMT(config: HodgeBSDConfig): string {
 ; Classification of cycles is ONE-BY-ONE (finite, not infinite)
 (declare-fun algebraic_cycles () Int)
 (assert (>= algebraic_cycles 1))
-(assert (<= algebraic_cycles MAX_CYCLES_QADAR))
+(assert (<= algebraic_cycles MAX_CYCLES_HODGE))
 
 ; Hodge conjecture (p,p): algebraic_cycles = h^{1,1} for dimension 2
 ; → rational (1,1)-classes = rational divisors (Lefschetz (1,1)-theorem, PROVEN)
@@ -97,7 +112,7 @@ export function generateHodgeBSDSMT(config: HodgeBSDConfig): string {
 
 ; Rank bounded by Ḥisāb (number of rational points is countable)
 (assert (>= elliptic_rank 0))
-(assert (<= elliptic_rank MAX_CYCLES_QADAR))
+(assert (<= elliptic_rank MAX_CYCLES_HODGE))
 
 ; BSD Conjecture: rank(E/ℚ) = order of zero of L(E,s) at s=1
 ; (PROVEN for rank 0 & 1: Gross-Zagier 1986, Kolyvagin 1989)

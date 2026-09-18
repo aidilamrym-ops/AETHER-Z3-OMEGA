@@ -39,11 +39,12 @@ export interface PoincareResult {
 export function generatePoincareSMT(config: PoincareConfig): string {
   const { ricciFlowMaxTime, scalarCurvatureBound, diameterBound, manifoldDim } = config;
 
-  return `${generateQuranicSMTLibrary()}
+return `${generateQuranicSMTLibrary()}
 
-; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-; POINCARÉ / RICCI FLOW CONFIGURATION
-; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; POINCARÉ / RICCI FLOW CONFIGURATION — UF + Nonlinear Real Arith + Quantifiers
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(set-logic UFNRA)
 (define-fun MANIFOLD_DIM () Int ${manifoldDim})
 (define-fun FLOW_MAX_TIME () Real ${ricciFlowMaxTime})
 (define-fun CURV_BOUND () Real ${scalarCurvatureBound})

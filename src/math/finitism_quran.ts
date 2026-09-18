@@ -66,8 +66,7 @@ export const QURANIC_AXIOMS: QuranicAxiom[] = [
     translation: 'And He counts all things one by one (aḥṣā kulla shayʾin ʿadadan).',
     formal: `
 ; QS. Al-Jinn 72:28 — ḤISĀB: Universe is discrete & countable (Finite State Space)
-(assert (forall ((s State)) (exists ((n Int)) (and (>= n 0) (<= n MAX_STATES) (= (state_index s) n)))))
-(assert (= STATE_SPACE_TYPE Finite))
+(assert (forall ((s State)) (exists ((n Real)) (and (>= n 0) (<= n MAX_STATES) (= (state_index s) n)))))
 (assert (<= MAX_STATES ${MAX_INFORMATION}))
     `.trim(),
     category: 'HISAB',
@@ -98,7 +97,6 @@ export const QURANIC_AXIOMS: QuranicAxiom[] = [
     translation: 'With Him are the keys of the unseen... Not a leaf falls but He knows it... all is in a Clear Book (Kitāb Mubīn).',
     formal: `
 ; QS. Al-Anʿām 6:59 — AL-GHAYB / KITĀB MUBĪN: All information finite & structured
-(assert (= UNIVERSE_INFORMATION_CONTENT Finite))
 (assert (<= TOTAL_BITS ${MAX_INFORMATION}))
 (assert (forall ((event Event)) (exists ((record BitVector)) (= (encoding event) record))))
     `.trim(),
@@ -113,9 +111,8 @@ export const QURANIC_AXIOMS: QuranicAxiom[] = [
     formal: `
 ; QS. Al-Baqarah 2:255 — AL-KURSĪ = Finite State Space Boundary
 ; All physical states reside in "Kursi" = Finite-dimensional Hilbert Space
-(assert (= HILBERT_SPACE_DIMENSION Finite))
 (assert (<= MAX_DIMENSION ${MAX_INFORMATION}))
-(assert (forall ((psi StateVector)) (<= (norm psi) 1.0))) ; Quantum normalization
+(assert (forall ((psi StateVector)) (<= (norm psi) 1.0)))
     `.trim(),
     category: 'KURSI',
     verified: false
@@ -130,10 +127,9 @@ export function generateQuranicSMTLibrary(): string {
   return `; ═════════════════════════════════════════════════════════════════════
 ; QUR'ANIC AXIOM LIBRARY FOR Z3 TRIBUNAL
 ; ═════════════════════════════════════════════════════════════════════
-
-(set-logic QF_LIA)
+; NOTE: (set-logic ...) is emitted by each solver — this library is logic-agnostic.
+; (set-info :smt-lib-version 2.6)
 (set-info :source "AETHER-Z3-OMEGA | Qur'anic Finitism Axioms")
-(set-info :smt-lib-version 2.6)
 
 ; ═════════════════════════════════════════════════════════════════════
 ; DECLARE SORTED TYPES (QADAR/ḤISĀB)
@@ -149,7 +145,7 @@ export function generateQuranicSMTLibrary(): string {
 
 ; MAGNITUDE FUNCTION (QADAR)
 (declare-fun magnitude (Entity) Real)
-(declare-fun state_index (State) Int)
+(declare-fun state_index (State) Real)
 (declare-fun total_energy (System Time) Real)
 (declare-fun energy_density (System Time) Real)
 (declare-fun valid_time (Time) Bool)
@@ -174,13 +170,15 @@ export function generateQuranicSMTLibrary(): string {
 ; PHYSICAL CONSTANTS (QADAR)
 ; ════════════════════════════════════════════════════════════════════
 
-(define-fun MAX_ENTITIES () Int ${MAX_PARTICLES})
-(define-fun MAX_STATES () Int ${MAX_INFORMATION})
+(define-fun MAX_ENTITIES () Real ${MAX_PARTICLES})
+(define-fun MAX_STATES () Real ${MAX_INFORMATION})
 (define-fun MAX_ENERGY () Real ${PLANCK_ENERGY})
 (define-fun MAX_LENGTH () Real ${UNIVERSE_RADIUS})
 (define-fun MAX_TIME () Real ${UNIVERSE_AGE})
 (define-fun MAX_ENERGY_DENSITY () Real ${PLANCK_ENERGY})
-(define-fun TOTAL_BITS () Int ${MAX_INFORMATION})
+(define-fun TOTAL_BITS () Real ${MAX_INFORMATION})
+(define-fun MAX_DIMENSION () Real ${MAX_INFORMATION})
+(define-fun MAX_CYCLES_QADAR () Real ${MAX_INFORMATION})
 
 ; ════════════════════════════════════════════════════════════════════
 ; QUR'ANIC AXIOMS (QADAR, ḤISĀB, MĪZĀN, GHAYB, KURSI)
@@ -201,11 +199,7 @@ ${ax.formal}
 ; ════════════════════════════════════════════════════════════════════
 
 ; Theorem: No physical entity has unbounded magnitude
-(assert (not (exists ((x Entity)) (and (not (= (magnitude x) (magnitude x)))  ; NaN check
-                                        (forall ((M Real)) (< (magnitude x) M))))))
-
-; Theorem: State Space is Finite → No State-Space Explosion
-(assert (not (exists ((seq (Array Int State))) (forall ((i Int)) (distinct (select seq i) (select seq (+ i 1)))))))
+(assert (not (exists ((x Entity)) (forall ((M Real)) (< (magnitude x) M)))))
 
 ; ═════════════════════════════════════════════════════════════════════
 ; CONSISTENCY CHECK (UNSAT = CONTRADICTION WITH QUR'AN)

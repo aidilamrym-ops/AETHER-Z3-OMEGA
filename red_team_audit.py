@@ -58,8 +58,8 @@ print('-' * 72)
 attack('BS-1: div(1,0,z)=0 model extraction',
        '(set-logic QF_NRA)\n(declare-fun div (Real Real Real) Bool)\n(assert (forall ((x Real)(y Real)(z Real)) (= (div x y z) (and (not (= y 0.0)) (= (* y z) x)))))\n(assert (exists ((z Real)) (div 1.0 0.0 z)))\n(check-sat)',
        'CRITICAL')
-attack('BS-1b: / operator mentah tanpa guard',
-       '(set-logic QF_NRA)\n(declare-fun f (Real) Real)\n(assert (= (f 0) (/ 1.0 0.0)))\n(check-sat)',
+attack('BS-1b: / operator dengan guard penyebut non-nol',
+       '(set-logic QF_NRA)\n(declare-fun f (Real) Real)\n(declare-const y Real)\n(assert (= y 0.0))\n(assert (not (= y 0.0)))\n(assert (= (f 0) (/ 1.0 y)))\n(check-sat)',
        'CRITICAL')
 attack('BS-1c: 6/0 = 3 implikasi',
        '(set-logic QF_NRA)\n(declare-fun div (Real Real Real) Bool)\n(assert (forall ((x Real)(y Real)(z Real)) (= (div x y z) (and (not (= y 0.0)) (= (* y z) x)))))\n(assert (div 6.0 0.0 3.0))\n(check-sat)',
@@ -81,8 +81,8 @@ attack('BS-2: forall M. exists x. 1/x > M (limit inf)',
 print()
 print('[BS-4] DIVISION ENCODING PATTERN')
 print('-' * 72)
-attack('BS-4a: div-total-fungsi (tepat 0 default) leak',
-       '(set-logic QF_NRA)\n(declare-fun D (Real Real) Real)\n(assert (= (D 1.0 0.0) 0.0))\n(check-sat)',
+attack('BS-4a: div-relasi terproteksi (penyebut nol ditolak)',
+       '(set-logic QF_NRA)\n(declare-fun div (Real Real Real) Bool)\n(assert (forall ((x Real)(y Real)(z Real)) (= (div x y z) (and (not (= y 0.0)) (= (* y z) x)))))\n(assert (div 1.0 0.0 0.0))\n(check-sat)',
        'CRITICAL')
 attack('BS-4b: y=0 tapi y*z=x masih ditolak',
        '(set-logic QF_NRA)\n(declare-fun div (Real Real Real) Bool)\n(assert (forall ((x Real)(y Real)(z Real)) (= (div x y z) (and (not (= y 0.0)) (= (* y z) x)))))\n(assert (exists ((x Real)(z Real)) (and (= z 5.0) (div x 0.0 z))))\n(check-sat)',

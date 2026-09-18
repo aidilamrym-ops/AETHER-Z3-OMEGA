@@ -8,6 +8,7 @@
 import type { MathNode } from './ast.ts';
 import { N, Add, Sub, Mul, Div, Sqrt } from './ast.ts';
 import { simplify, evaluate } from './simplify.ts';
+import { storeLemmaIfAbsent } from './lemma_vault.ts';
 
 // ─── SOLUTION TYPES ─────────────────────────────────────────────
 
@@ -159,6 +160,12 @@ function extractPolyCoeffs(eq: MathNode, v: string): PolyCoeffs | null {
 
 // ─── LINEAR: ax + b = 0 ────────────────────────────────────────
 
+/**
+ * Solves a linear equation ax + b = 0.
+ * @param coeffs Polynomial coefficients [b, a] where body = ax + b.
+ * @param v Variable name to solve for.
+ * @returns SolveResult with solutions.
+ */
 function solveLinear(coeffs: number[], v: string): SolveResult {
   const [b, a] = coeffs;
   if (a === 0) {
@@ -168,11 +175,15 @@ function solveLinear(coeffs: number[], v: string): SolveResult {
   return { solutions: [solution], variable: v, method: 'linear', verified: true };
 }
 
-// ─── QUADRATIC: ax² + bx + c = 0 ──────────────────────────────
-
+/**
+ * Solves a quadratic equation ax² + bx + c = 0.
+ * Handles real and complex roots.
+ * @param coeffs Polynomial coefficients [c, b, a] where body = ax^2 + bx + c.
+ * @param v Variable name to solve for.
+ * @returns SolveResult with solutions.
+ */
 function solveQuadratic(coeffs: number[], v: string): SolveResult {
   // robust extraction: a is highest-degree coeff, c is constant term
-  console.log('DEBUG coeffs in solveQuadratic:', coeffs);
   const len = coeffs.length;
 
   const a = coeffs[len - 1];
@@ -200,6 +211,7 @@ function solveQuadratic(coeffs: number[], v: string): SolveResult {
   const s2 = Sub(realPart, Mul(N(0), imagPart));
   return { solutions: [s1, s2], variable: v, method: 'quadratic-complex', verified: false };
 }
+
 
 
 // ─── CUBIC (Cardano) ────────────────────────────────────────────
@@ -448,10 +460,17 @@ export function solve(eq: MathNode, v: string): SolveResult {
   const coeffs = extractPolyCoeffs(simplified, v);
 
   if (coeffs && coeffs.degree >= 1 && coeffs.coeffs.every(Number.isFinite)) {
+    let res: SolveResult | null = null;
     switch (coeffs.degree) {
-      case 1: return solveLinear(coeffs.coeffs, v);
-      case 2: return solveQuadratic(coeffs.coeffs, v);
-      case 3: return solveCubic(coeffs.coeffs, v);
+      case 1: res = solveLinear(coeffs.coeffs, v); break;
+      case 2: res = solveQuadratic(coeffs.coeffs, v); break;
+      case 3: res = solveCubic(coeffs.coeffs, v); break;
+    }
+    if (res) {
+      if (res.verified && res.solutions.length > 0) {
+        storeLemmaIfAbsent(eq, res.method, 0.98, [`analytical solve for ${v}`]);
+      }
+      return res;
     }
   }
 
@@ -473,12 +492,18 @@ export function solve(eq: MathNode, v: string): SolveResult {
     return Math.abs(evalAt(body, v, s.value)) < 1e-6;
   });
 
-  return {
+  const result = {
     solutions,
     variable: v,
     method: coeffs && coeffs.degree > 3 ? `poly-deg-${coeffs.degree}-numerical` : 'numerical-newton-bisection',
     verified
   };
+
+  if (verified && solutions.length > 0) {
+    storeLemmaIfAbsent(eq, result.method, 0.95, [`solved for ${v}`]);
+  }
+
+  return result;
 }
 
 export function solveSystemOf(equations: MathNode[], variables: string[]): SystemSolveResult | null {

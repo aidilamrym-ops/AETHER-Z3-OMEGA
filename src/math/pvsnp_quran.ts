@@ -50,11 +50,12 @@ export function generatePvsNPSMT(config: PvsNPConfig): string {
   const { maxVars, resourcesBits } = config;
   const criticalN = Math.floor(Math.log2(resourcesBits));
 
-  return `${generateQuranicSMTLibrary()}
+return `${generateQuranicSMTLibrary()}
 
-; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-; P vs NP CONFIGURATION
-; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; P vs NP CONFIGURATION — UF + Nonlinear Int Arith + Quantifiers (bitwise)
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(set-logic UFNIA)
 (define-fun MAX_VARS () Int ${maxVars})
 (define-fun RESOURCE_BITS () Int ${resourcesBits})
 (define-fun CRITICAL_N () Int ${criticalN})

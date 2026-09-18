@@ -118,22 +118,24 @@ print('='*70)
 print('4. STRESS TEST (N scaling for EXPTIME)')
 print('='*70)
 
+def build_nth_power(n: int, var: str) -> str:
+    """Build balanced (var^k) = 1 term for k = n via repeated squaring,
+    avoiding hand-written paren bugs."""
+    # binary exponentiation produces a shallow, balanced product tree
+    result = None
+    factor = var
+    k = n
+    while k > 0:
+        if k % 2 == 1:
+            result = factor if result is None else f'(* {result} {factor})'
+        k //= 2
+        if k > 0:
+            factor = f'(* {factor} {factor})'
+    return result
+
 for n in [4, 8, 16, 32, 64]:
     # Build x^n = 1
-    if n == 4:
-        expr = '(* x (* x (* x x)))'
-    elif n == 8:
-        expr = '(* x (* x (* x (* x (* x (* x (* x x)))))))'
-    elif n == 16:
-        x8 = '(* x (* x (* x (* x (* x (* x (* x x)))))))'
-        expr = f'(* {x8} {x8})'
-    elif n == 32:
-        x16 = '(* (* x (* x (* x (* x (* x (* x (* x x))))))) (* x (* x (* x (* x (* x (* x (* x x))))))))'
-        expr = f'(* {x16} {x16})'
-    elif n == 64:
-        x32 = '(* (* (* x (* x (* x (* x (* x (* x (* x x))))))) (* x (* x (* x (* x (* x (* x (* x x))))))))) (* (* x (* x (* x (* x (* x (* x (* x x))))))) (* x (* x (* x (* x (* x (* x (* x x))))))))))'
-        expr = f'(* {x32} {x32})'
-    
+    expr = build_nth_power(n, 'x')
     smt = f'(set-logic QF_NRA)\n(declare-const x Real)\n(assert (= (- {expr} 1.0) 0.0))\n(check-sat)'
     ok, status, ms = run(f'STRESS: x^{n}=1', smt, 'SAT', timeout_ms=30000, category='STRESS')
     print(f'  x^{n:2d} = 1 | {ms:8.1f} ms | {status} | PASS={ok}')

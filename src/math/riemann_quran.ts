@@ -50,11 +50,12 @@ export interface RiemannResult {
 export function generateRiemannSMT(config: RiemannConfig): string {
   const { maxT, precision, maxZeros } = config;
 
-  return `${generateQuranicSMTLibrary()}
+return `${generateQuranicSMTLibrary()}
 
-; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-; RIEMANN ZETA CONFIGURATION
-; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+; RIEMANN ZETA CONFIGURATION — UF + Nonlinear Real Arith + Quantifiers
+; ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(set-logic UFNRA)
 (define-fun MAX_T () Real ${maxT.toFixed(1)})
 (define-fun PRECISION () Real ${precision.toExponential(3)})
 (define-fun MAX_ZEROS () Int ${maxZeros})
