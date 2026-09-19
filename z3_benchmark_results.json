@@ -1,0 +1,32 @@
+{
+  "navier_stokes": {
+    "status": "ERROR",
+    "error": "Command failed: python C:\\Users\\usER\\AppData\\Local\\Temp\\z3bench-mzCWJ2\\run_z3.py",
+    "time": 0
+  },
+  "riemann": {
+    "status": "ERROR",
+    "error": "Command failed: python C:\\Users\\usER\\AppData\\Local\\Temp\\z3bench-r2GArA\\run_z3.py",
+    "time": 0
+  },
+  "yang_mills": {
+    "status": "ERROR",
+    "error": "Command failed: python C:\\Users\\usER\\AppData\\Local\\Temp\\z3bench-Duk5DU\\run_z3.py",
+    "time": 0
+  },
+  "p_vs_np": {
+    "status": "ERROR",
+    "error": "Command failed: python C:\\Users\\usER\\AppData\\Local\\Temp\\z3bench-3WQHJp\\run_z3.py",
+    "time": 0
+  },
+  "hodge_bsd": {
+    "status": "ERROR",
+    "error": "Command failed: python C:\\Users\\usER\\AppData\\Local\\Temp\\z3bench-zY3337\\run_z3.py",
+    "time": 0
+  },
+  "poincare": {
+    "status": "ERROR",
+    "error": "Command failed: python C:\\Users\\usER\\AppData\\Local\\Temp\\z3bench-gEF712\\run_z3.py",
+    "time": 0
+  }
+}

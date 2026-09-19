@@ -32,7 +32,15 @@ interface PolyCoeffs {
   coeffs: number[];
 }
 
-function collectTerms(node: MathNode): Map<string, number> {
+/**
+ * Extracts polynomial coefficients from an equation.
+ * Returns coefficients in ascending order of degree: [c0, c1, c2, ...] for c0 + c1*x + c2*x² + ...
+ * Handles x*x as x², x*x*x as x³, etc.
+ * @param eq The equation or expression to extract coefficients from
+ * @param v The variable name (e.g., 'x')
+ * @returns PolyCoeffs object or null if not a valid polynomial
+ */
+function extractPolyCoeffs(eq: MathNode, v: string): PolyCoeffs | null {
   const terms = new Map<string, number>();
   function walk(n: MathNode, sign: number) {
     if (n.kind === 'num') { const k = `_const`; terms.set(k, (terms.get(k) ?? 0) + sign * n.value); return; }
@@ -180,37 +188,51 @@ function solveLinear(coeffs: number[], v: string): SolveResult {
 }
 
 /**
+ * Simplifies a numeric coefficient to its simplest rational/decimal form.
+ * Converts fractions like 1/2 to 0.5, simplifies 2/4 to 0.5, etc.
+ */
+function simplifyCoeff(val: number): number {
+  if (!Number.isFinite(val)) return val;
+  // For exact rational values, try to keep them as simple decimals
+  // If it's a simple fraction with small denominator, convert to decimal
+  const tolerance = 1e-12;
+  // Round to 12 decimal places to avoid floating point artifacts
+  return Math.round(val * 1e12) / 1e12;
+}
+
+/**
  * Solves a quadratic equation ax² + bx + c = 0.
  * Handles real and complex roots.
+ * Supports rational/fractional coefficients (e.g., 1/2*x^2 + 3/4*x + 5/6 = 0).
  * @param coeffs Polynomial coefficients [c, b, a] where body = ax^2 + bx + c.
  * @param v Variable name to solve for.
- * @returns SolveResult with solutions.
+ * @returns SolveResult with solutions (coefficients simplified to decimals).
  */
 function solveQuadratic(coeffs: number[], v: string): SolveResult {
   // robust extraction: a is highest-degree coeff, c is constant term
   const len = coeffs.length;
 
-  const a = coeffs[len - 1];
-  const b = coeffs[len - 2];
-  const c = coeffs[0];
-  if (a === 0) return solveLinear([b, c], v);
+  const a = simplifyCoeff(coeffs[len - 1]);
+  const b = simplifyCoeff(coeffs[len - 2]);
+  const c = simplifyCoeff(coeffs[0]);
+  if (a === 0) return solveLinear([simplifyCoeff(b), simplifyCoeff(c)], v);
 
   const disc = b * b - 4 * a * c;
 
   if (disc > 1e-12) {
     const sqrtDisc = Math.sqrt(disc);
-    const s1 = N((-b - sqrtDisc) / (2 * a));
-    const s2 = N((-b + sqrtDisc) / (2 * a));
+    const s1 = N(simplifyCoeff((-b - sqrtDisc) / (2 * a)));
+    const s2 = N(simplifyCoeff((-b + sqrtDisc) / (2 * a)));
     return { solutions: [s1, s2], variable: v, method: 'quadratic-formula', verified: true };
   }
 
   if (Math.abs(disc) <= 1e-12) {
-    const s = N(-b / (2 * a));
+    const s = N(simplifyCoeff(-b / (2 * a)));
     return { solutions: [s], variable: v, method: 'quadratic-repeated', verified: true };
   }
 
-  const realPart = N(-b / (2 * a));
-  const imagPart = simplify(Div(Sqrt(N(-disc)), N(2 * a)));
+  const realPart = N(simplifyCoeff(-b / (2 * a)));
+  const imagPart = simplify(Div(Sqrt(N(simplifyCoeff(-disc))), N(simplifyCoeff(2 * a))));
   const s1 = Add(realPart, Mul(N(0), imagPart));
   const s2 = Sub(realPart, Mul(N(0), imagPart));
   return { solutions: [s1, s2], variable: v, method: 'quadratic-complex', verified: false };

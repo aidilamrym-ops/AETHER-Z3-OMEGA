@@ -40,11 +40,80 @@ npm install
 # 3. Type-check (must pass)
 npm run typecheck
 
+# 5. Run tests
+npx tsx src/test_verification.ts
+npx tsx src/test_math.ts
+npx tsx src/test_problems.ts
+npx tsx src/test_engine.ts
+npx tsx src/run_real_tests.ts
+npx tsx src/test_solve_lemma.ts
+
 # 4. Run Z3 benchmarks
 python bench_all_7.py
 python bench_quranic_axioms.py
 python bench_limits.py
 python bench_obstruction.py
+```
+
+## Equation Solver Usage
+
+```typescript
+import { V, N, Eq, Add, Mul, Div } from './src/math/ast.ts';
+import { solve } from './src/math/solve.ts';
+
+// Solve linear: 2x + 4 = 0 → x = -2
+const linear = Eq(Add(Mul(N(2), V('x')), N(4)), N(0));
+const res1 = solve(linear, 'x');
+console.log(res1.solutions); // [-2]
+
+// Solve quadratic: x² - 5x + 6 = 0 → x = 2, 3
+const quadratic = Eq(
+  Add(Add(Mul(V('x'), V('x')), Mul(N(-5), V('x'))), N(6)), 
+  N(0)
+);
+const res2 = solve(quadratic, 'x');
+console.log(res2.solutions.map(s => s.value)); // [2, 3]
+
+// Solve quadratic with rational coefficients: (1/2)x² + (3/4)x - 5/6 = 0
+const rational = Eq(
+  Add(Add(Mul(Div(N(1), N(2)), Mul(V('x'), V('x'))), Mul(Div(N(3), N(4)), V('x'))), Div(N(-5), N(6))),
+  N(0)
+);
+const res3 = solve(rational, 'x');
+console.log(res3.solutions.map(s => s.value)); // [ -2.243..., 0.743... ]
+
+// Solve cubic: x³ - 6x² + 11x - 6 = 0 → roots 1, 2, 3
+const cubic = Eq(
+  Add(Add(Add(Mul(V('x'), Mul(V('x'), V('x'))), Mul(N(-6), Mul(V('x'), V('x')))), Mul(N(11), V('x'))), N(-6)),
+  N(0)
+);
+const res4 = solve(cubic, 'x');
+console.log(res4.solutions.map(s => s.value)); // [1, 2, 3]
+```
+
+## Lemma Vault Usage
+
+```typescript
+import { getGlobalLemmaVault, storeLemmaIfAbsent } from './src/math/lemma_vault.ts';
+import { V, N, Eq, Add, Mul } from './src/math/ast.ts';
+import { solve } from './src/math/solve.ts';
+
+const vault = getGlobalLemmaVault();
+
+// Solve and auto-store lemma
+const eq = Eq(Add(Mul(N(3), V('y')), N(9)), N(0)); // 3y + 9 = 0
+const res = solve(eq, 'y');
+console.log(res.solutions); // [-3]
+
+// Lemma auto-stored with confidence >= 0.9
+const lemma = vault.findByStatement(eq);
+console.log(lemma.confidence); // >= 0.9
+
+// Check vault stats
+console.log(vault.getStats()); // { total: N, avgConfidence: ..., totalReuse: ... }
+
+// Manually store lemma
+const myLemma = storeLemmaIfAbsent(eq, 'custom-method', 0.95, ['custom proof']);
 ```
 
 ## Verified Components

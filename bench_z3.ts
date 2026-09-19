@@ -9,6 +9,8 @@ import { writeFileSync, mkdtempSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 
+const osTmpdir = tmpdir();
+
 // Generate SMT from each solver using tsx
 function generateSMT(scriptPath: string): string {
   try {
@@ -57,8 +59,8 @@ if result == unsat:
     print(f"UNSAT_CORE:{len(core)}")
 `;
 
-  const tmpDir = mkdtempSync({ dir: tmpdir(), prefix: 'z3bench-' });
-  const scriptPath = join(tmpdir, 'run_z3.py');
+  const tmpDir = mkdtempSync(join(osTmpdir, 'z3bench-'));
+  const scriptPath = join(tmpDir, 'run_z3.py');
   writeFileSync(scriptPath, pythonScript);
   
   try {
