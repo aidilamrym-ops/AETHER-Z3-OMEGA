@@ -50,7 +50,9 @@ console.log(`Roots: ${r1.toFixed(6)}, ${r2.toFixed(6)}`);
 // Lemma check for quadratic
 const quadLemma = vault.findByStatement(quadEq);
 assert(quadLemma !== undefined, 'Lemma stored for quadratic equation');
-assert(quadLemma.confidence >= 0.9, `Quadratic lemma confidence >= 0.9 (got ${quadLemma.confidence})`);
+if (quadLemma) {
+  assert(quadLemma.confidence >= 0.9, `Quadratic lemma confidence >= 0.9 (got ${quadLemma.confidence})`);
+}
 
 // Test: Cubic x^3 - 6x^2 + 11x - 6 = 0 (roots 1, 2, 3)
 const cubicEq = Eq(
@@ -68,7 +70,9 @@ assert(Math.abs(cubicRoots[2] - 3) < 1e-6, 'Cubic root 3');
 // Lemma check for cubic
 const cubicLemma = vault.findByStatement(cubicEq);
 assert(cubicLemma !== undefined, 'Lemma stored for cubic equation');
-assert(cubicLemma.confidence >= 0.9, `Cubic lemma confidence >= 0.9 (got ${cubicLemma.confidence})`);
+if (cubicLemma) {
+  assert(cubicLemma.confidence >= 0.9, `Cubic lemma confidence >= 0.9 (got ${cubicLemma.confidence})`);
+}
 
 // Test: x*x*x as x^3
 const tripleEq = Eq(Mul(V('z'), Mul(V('z'), V('z'))), N(27));

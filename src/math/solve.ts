@@ -33,42 +33,39 @@ interface PolyCoeffs {
 }
 
 /**
- * Extracts polynomial coefficients from an equation.
- * Returns coefficients in ascending order of degree: [c0, c1, c2, ...] for c0 + c1*x + c2*x² + ...
- * Handles x*x as x², x*x*x as x³, etc.
- * @param eq The equation or expression to extract coefficients from
- * @param v The variable name (e.g., 'x')
- * @returns PolyCoeffs object or null if not a valid polynomial
+ * Collects terms from a polynomial expression, returning a map of term keys to coefficients.
+ * Handles x*x as x^2, x*x*x as x^3, etc.
+ * @param node The AST node to walk
+ * @param sign The sign (+1 or -1) to apply to coefficients
+ * @param terms Map to accumulate terms
  */
-function extractPolyCoeffs(eq: MathNode, v: string): PolyCoeffs | null {
-  const terms = new Map<string, number>();
-  function walk(n: MathNode, sign: number) {
-    if (n.kind === 'num') { const k = `_const`; terms.set(k, (terms.get(k) ?? 0) + sign * n.value); return; }
-    if (n.kind === 'var') { const k = n.name; terms.set(k, (terms.get(k) ?? 0) + sign); return; }
-    if (n.kind === 'unary' && n.op === '-') { walk(n.operand, -sign); return; }
-    if (n.kind === 'binop' && n.op === '+') { walk(n.left, sign); walk(n.right, sign); return; }
-    if (n.kind === 'binop' && n.op === '-') { walk(n.left, sign); walk(n.right, -sign); return; }
-    if (n.kind === 'binop' && n.op === '*') {
-      const powers = new Map<string, number>();
-      let coeff = collectPowerFactors(n, powers);
-      for (const [varName, exp] of powers) {
-        const key = exp === 1 ? varName : `${varName}^${exp}`;
-        terms.set(key, (terms.get(key) ?? 0) + sign * coeff);
-      }
-      return;
+function collectTerms(node: MathNode, sign: number, terms: Map<string, number>): void {
+  if (node.kind === 'num') { const k = `_const`; terms.set(k, (terms.get(k) ?? 0) + sign * node.value); return; }
+  if (node.kind === 'var') { const k = node.name; terms.set(k, (terms.get(k) ?? 0) + sign); return; }
+  if (node.kind === 'unary' && node.op === '-') { collectTerms(node.operand, -sign, terms); return; }
+  if (node.kind === 'binop' && node.op === '+') { collectTerms(node.left, sign, terms); collectTerms(node.right, sign, terms); return; }
+  if (node.kind === 'binop' && node.op === '-') { collectTerms(node.left, sign, terms); collectTerms(node.right, -sign, terms); return; }
+  if (node.kind === 'binop' && node.op === '*') {
+    const powers = new Map<string, number>();
+    let coeff = collectPowerFactors(node, new Map<string, number>());
+    for (const [varName, exp] of powers) {
+      const key = exp === 1 ? varName : `${varName}^${exp}`;
+      terms.set(key, (terms.get(key) ?? 0) + sign * coeff);
     }
-    if (n.kind === 'pow' && n.base.kind === 'var' && n.exp.kind === 'num') { const k = nodeToKey(n); terms.set(k, (terms.get(k) ?? 0) + sign); return; }
-    const fallback = evaluate(n, {}) ?? 0;
-    if (Number.isFinite(fallback)) { terms.set('_const', (terms.get('_const') ?? 0) + sign * fallback); return; }
+    return;
   }
-  walk(node, 1);
-  return terms;
+  if (node.kind === 'pow' && node.base.kind === 'var' && node.exp.kind === 'num') { const k = nodeToKey(node); terms.set(k, (terms.get(k) ?? 0) + sign); return; }
+  const fallback = evaluate(node, {}) ?? 0;
+  if (Number.isFinite(fallback)) { terms.set('_const', (terms.get('_const') ?? 0) + sign * fallback); return; }
 }
 
 /**
  * Collects the exponent of each variable across a product tree and
  * returns the constant multiplier. Handles x*x -> x^2, x*x*x -> x^3,
  * (x^2)*(x^3) -> x^5, and mixed constant coefficients.
+ * @param node The node to analyze
+ * @param powers Map to accumulate variable exponents
+ * @returns The constant multiplier
  */
 function collectPowerFactors(node: MathNode, powers: Map<string, number>): number {
   if (node.kind === 'num') return node.value;
@@ -119,6 +116,14 @@ function nodeToKey(node: MathNode): string {
   return JSON.stringify(node);
 }
 
+/**
+ * Extracts polynomial coefficients from an equation.
+ * Returns coefficients in ascending order of degree: [c0, c1, c2, ...] for c0 + c1*x + c2*x² + ...
+ * Handles x*x as x², x*x*x as x³, etc.
+ * @param eq The equation or expression to extract coefficients from
+ * @param v The variable name (e.g., 'x')
+ * @returns PolyCoeffs object or null if not a valid polynomial
+ */
 function extractPolyCoeffs(eq: MathNode, v: string): PolyCoeffs | null {
   let body: MathNode;
   if (eq.kind === 'equation') {
@@ -128,7 +133,9 @@ function extractPolyCoeffs(eq: MathNode, v: string): PolyCoeffs | null {
   }
   body = simplify(body);
 
-  const terms = collectTerms(body);
+  const terms = new Map<string, number>();
+  collectTerms(body, 1, terms);
+
   let maxDeg = 0;
   const coeffs: Record<number, number> = {};
 
@@ -193,9 +200,6 @@ function solveLinear(coeffs: number[], v: string): SolveResult {
  */
 function simplifyCoeff(val: number): number {
   if (!Number.isFinite(val)) return val;
-  // For exact rational values, try to keep them as simple decimals
-  // If it's a simple fraction with small denominator, convert to decimal
-  const tolerance = 1e-12;
   // Round to 12 decimal places to avoid floating point artifacts
   return Math.round(val * 1e12) / 1e12;
 }
